@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="./Template/template.xhtml">
+            <ui:define name="content">
+                <div class="main">
+                    <div class="main-inner">
+                        <b:container fluid="true">
+                            <h:form id="formulario">
+                                <b:row>                                          
+                                    <b:column  >
+                                        <center>
+                                            <div class="widget ">
+                                                <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                                    <h3>Confirmación de Selección</h3>
+                                                </div>
+                                                <!-- /widget-header -->
+                                                <div class="widget-content">
+                                                    <div class="widget big-stats-container">
+                                                        <div class="widget-content img-responsive" > 
+
+                                                            <center>
+                                                                <header>
+                                                                    <div class="contenido" align="left">	
+                                                                        <br>Buenos días: #{sesionCT.obtenerSesion().nombre} </br>
+
+                                                                        <br>El siguiente mensaje es para confirmar su elección de regalo para su hijo(a) #{jugueteCT.pedido.nombreHijo}  en la sala virtual. </br>
+                                                                        <h2>Regalo Seleccionado:  #{jugueteCT.juguete.codigo} #{jugueteCT.juguete.descripcion} </h2>
+                                                                        <br></br>
+                                                                        <div class="relagalo" align="center"    >
+                                                                            <!--                                                                            <img src="https://drive.google.com/file/d/0B2ep_qWwEJgddnd3a0Ezd1lWN3c/view?usp=sharing"/>-->
+                                                                        </div>
+                                                                        <div class="texto">
+
+                                                                            <fieldset>   <br></br><h4>Por favor imprimir y Presentar el siguiente comprobante para poder reclamar su presente. </h4> <br></br>
+                                                                                <br></br><h3>Código Único del Regalo:#{jugueteCT.pedido.idPedido} </h3>
+                                                                            </fieldset>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <footer>
+                                                                        <!--	<h5>
+                                                                                Cualquier duda o inquietud respecto al acceso o al uso de la Sala Virtual  no dude en comunicarse al área de Soporte al Cliente; allí daremos solución a todas sus dudas o inconvenientes. Puede contactarnos a través de los siguientes medios:  <br> Correo electrónico: sac.juguetes@distribuidoraelfaro.co<br>	Celular: 3186619233
+                                                                        </h5>-->
+                                                                        <!--                                                                        <img src="https://drive.google.com/file/d/0B2ep_qWwEJgddnd3a0Ezd1lWN3c/view?usp=sharing"></img>
+                                                                                                                                                <img src="https://drive.google.com/file/d/0B2ep_qWwEJgddnd3a0Ezd1lWN3c/view?usp=sharing"></img>-->
+                                                                    </footer>	
+
+                                                                </header>
+                                                            </center>
+
+                                                            <!--panelWidth="800" panelHeight="400"-->
+                                                        </div>
+                                                        <p>
+                                                            <input class="btn btn-danger" type="button" name="imprimir" value="Imprimir y/o Guardar" onclick="window.print();"></input>
+                                                            <!--                                                            <b:commandButton value="Imprimir y/o Guardar" action="Seleccion de Juguetes" class="btn btn-danger " update=":formulario" style="margin-right: 10px;">
+                                                                                                                          
+                                                                                                                        </b:commandButton>-->
+
+                                                            <b:commandButton value="Aceptar!" action="${pedidoCT.editarPedido(sesionCT.obtenerSesion().idUsuario,jugueteCT.pedido.idPedido, jugueteCT.juguete.idInventario)}" update=":formulario" class="btn btn-info " >
+                                                                <b:iconAwesome name="send"></b:iconAwesome>
+                                                            </b:commandButton>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </b:column>
+                                </b:row>
+                            </h:form>
+                        </b:container>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

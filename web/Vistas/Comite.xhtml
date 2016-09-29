@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./Template/template.xhtml">
+
+
+            <ui:define name="menu">
+
+                <ul class="mainnav">
+                    <li >
+                        <h:link outcome="Dashboard">
+                            <i class="fa fa-home"></i><span>Dashboard</span>                                 
+                        </h:link>
+                    </li>
+                    <li>
+                        <h:link outcome="Empresa">
+                            <i class="fa fa-building"></i><span>Empresas</span> 
+                        </h:link>
+                    </li>         
+                    <li >
+                        <h:link outcome="Usuario">
+                            <i class="fa fa-user"></i><span>Usuarios</span> 
+                        </h:link>
+                    </li>   
+                    <li >
+                        <h:link outcome="Inventario">
+                            <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
+                        </h:link>
+                    </li>
+
+                    <li class="active">
+                        <h:link outcome="Comite">
+                            <i class="fa fa-users"></i><span>Comite </span> 
+                        </h:link>
+                    </li>
+                </ul>
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="main">
+                    <div class="main-inner">
+                        <b:container fluid="true">
+                            <b:row>
+                                <h:form id="formularioComite">
+                                    <p:growl showDetail="true" autoUpdate="true" id="msg" life="3000"/>
+                                    <b:column  col-lg="6" col-md="6" col-sm="12" col-xs="12">
+                                        <div class="widget">
+                                            <div class="widget-header">
+                                                <i class="fa fa-list-ol"></i>
+                                                <h3>Registro del comite</h3>
+                                            </div>
+                                            <div class="widget-content">
+                                                <div class=" widget big-stats-container">
+                                                    <div class="form-horizontal" >
+                                                        <div class="widget-content">
+                                                            <div class="form-group">
+                                                                <label for="inputNombre" class="control-label">Nombre del comite: </label>
+                                                                <b:inputText id="inputNombre" span="12" placeholder="Nombre del comite" value="#{comiteCT.comite.nombre}" requiredMessage="El nombre del comite es requerido" required="true"/>                                                            
+                                                                <p:message for="inputNombre"> </p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputDescripcion" class="control-label">Descripcion: </label>
+                                                                <b:inputTextarea id="inputDescripcion" span="12" rows="3" placeholder="Descripcion" value="#{comiteCT.comite.descripcion}" requiredMessage="La descripcion del comite es requerida" required ="true"/>                                                            
+                                                                <p:message for="inputDescripcion" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="SMEmpresas" class="control-label">Descripcion: </label>
+                                                                <h:selectOneMenu id="SMEmpresas" class="form-control" value="#{comiteCT.comite.idEmpresa.idEmpresa}" requiredMessage="La seleccion de la empresa es requerida" required ="true">
+                                                                    <f:selectItem itemLabel="Seleccione Empresa" noSelectionOption="true"/>
+                                                                    <f:selectItems value="#{empresaCT.empresasConComite}" var="empresa" itemLabel="#{empresa.nombre}" itemValue="#{empresa.idEmpresa}"/>
+                                                                    <p:ajax event="change" listener="#{usuarioCT.cargarEmpleadosSegunEmpresa(comiteCT.comite.idEmpresa)}" update="DTEmpleados"/>
+                                                                </h:selectOneMenu>                                                            
+                                                                <p:message for="SMEmpresas" ></p:message>
+                                                            </div>
+
+                                                            <hr/>
+
+                                                            <table class="table-responsive" width="100%">
+                                                                <tr>
+                                                                    <td width="50%" align="center">
+
+                                                                        <h:panelGrid width="100%" columns="1">
+                                                                            <label class="control-label" for="TFechaDesde">Fecha Apertura</label>
+                                                                            <p:calendar requiredMessage="Seleccione fecha de apertura" showOn="button" value="#{comiteCT.comite.fechaApertura}" placeholder="YYYY/MM/DD" id="TFechaDesde" required="true"/>
+                                                                            <p:message for="TFechaDesde"/>
+                                                                        </h:panelGrid>
+
+                                                                    </td>
+                                                                    <td width="50%" align="center">
+
+                                                                        <h:panelGrid width="100%" columns="1">
+                                                                            <label class="control-label" for="TFechaHasta" >Fecha Cierre</label>
+                                                                            <p:calendar requiredMessage="Seleccione fecha de cierre" showOn="button" value="#{comiteCT.comite.fechaCierre}" placeholder="YYYY/MM/DD" id="TFechaHasta" required="true"/>
+                                                                            <p:message for="TFechaHasta"/>
+                                                                        </h:panelGrid>
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table> 
+                                                            <hr/>
+                                                            <div align="center">
+                                                                <p:commandButton class="btn btn-info" action="#{comiteCT.registrar()}" style="width: 60%" update=":formularioComite" value="Crear comite"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+                                        </div>
+                                        <br/>
+                                        <div align="center">
+                                            <p:commandButton icon="fa fa-arrow-right" iconPos="right" class="btn btn-success" action="#{comiteCT.registrar()}" style="width: 60%" update=":formularioComite" value="Ver Comites creados"/>
+                                        </div>                                            
+                                    </b:column>
+
+                                    <b:column col-lg="6" col-md="6" col-sm="12" col-xs="12">
+                                        <div>
+                                            <div class="widget-header">
+                                                <i class="fa fa-user"></i>
+                                                <h3>Seleccion de empleados</h3>
+                                            </div>
+                                            <div class="widget-content">
+                                                <p:inputText class="form-control" placeholder="Buscar.." value="#{usuarioCT.buscar}">
+                                                    <p:ajax event="keyup" listener="#{usuarioCT.buscarSegunTipo()}" update="DTEmpleados"/>
+                                                </p:inputText><br/>
+                                                <div class="table table-responsive">
+                                                    <p:dataTable id="DTEmpleados" rowKey="#{empleado.idUsuario}" var="empleado" selection="#{comiteCT.empleados}" value="#{usuarioCT.usuariosTipoEmpleado}" rows="10"
+                                                                 paginator="true"
+                                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="5,10,15" emptyMessage="No hay empleados registrados">
+                                                        <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
+                                                        <p:column headerText="Nombre">
+                                                            <p:outputLabel value="#{empleado.nombre}" />
+                                                        </p:column>
+                                                        <p:column headerText="CC">
+                                                            <p:outputLabel value="#{empleado.cc}" />
+                                                        </p:column>
+                                                        <p:column headerText="Codigo del empleado">
+                                                            <p:outputLabel value="#{empleado.codigoEmpleado}" />
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </b:column>
+                                </h:form>
+
+
+                            </b:row>
+                        </b:container>
+                    </div>                        
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

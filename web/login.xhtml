@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <h:outputStylesheet name="./css/login.css"/>
+        <title>Sala Virtual</title>
+    </h:head>
+
+    <h:body>
+        <div class="login-page">
+            <img src="resources/images/niños-login.png" alt="" id="nn"/>
+            <div class="form">
+                <h:form id="formulario" class="login-form">
+                    <p:growl autoUpdate="true" life="2500"/>
+                    <h:inputText id="log" value="#{sesionCT.usuario.usuario}"  requiredMessage="El Usuario es Requerido"  required ="true">
+                        <f:passThroughAttribute name="type" value="text"/>
+                        <f:passThroughAttribute name="placeholder" value="Nombre de usuario"/>
+                               </h:inputText>  <p:message for="log" ></p:message>
+                    <h:inputSecret id="pwd" value="#{sesionCT.usuario.contrasena}" requiredMessage="La Contraseña es Requerida"  required ="true">
+                        <f:passThroughAttribute name="type" value="password"/>
+                        <f:passThroughAttribute name="placeholder" value="Contraseña"/>
+                    </h:inputSecret><p:message for="pwd" ></p:message>
+                    <p:commandButton  class="button" action="#{sesionCT.iniciarSesion()}" update=":formulario" value="iniciar Sesion"></p:commandButton>
+                    <!--<p class="message">Aun sin registrarse? <a href="#">Crea una cuenta</a></p>-->                  
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./Template/template.xhtml">
+
+            <ui:define name="content">
+
+                <div class="main">
+                    <div class="main-inner">
+                        <b:container fluid="true">
+                            <h:form id="formularioLista">
+                                <c:choose>
+
+                                    <c:when test="${jugueteCT.vista == 0}">
+
+                                        <b:row>
+                                            <b:column  >
+                                                <center>
+                                                    <div class="widget ">
+                                                        <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                                            <h3>Escoja un Juguete para su hijo</h3>
+                                                        </div>
+                                                        <!-- /widget-header -->
+                                                        <div class="widget-content">
+                                                            <div class="widget big-stats-container">
+                                                                <div class="widget-content img-responsive" > 
+
+                                                                    <c:forEach items="#{pedidoCT.pedidos}" var="item">           
+                                                                        <b:column col-sm="6" col-md="4">
+                                                                            <b:thumbnail>
+
+                                                                                <c:if test="${item.sexoHijo.trim() == 'M'}">
+                                                                                    <img  src=".././resources/images/ninos.png" alt="Generic placeholder thumbnail"/>
+                                                                                </c:if>
+                                                                                <c:if test="${item.sexoHijo.trim() == 'F'}">
+                                                                                    <img  src=".././resources/images/ninas.png" alt="Generic placeholder thumbnail"/>
+                                                                                </c:if>
+                                                                                <f:facet name="caption">
+                                                                                    <h3>#{item.nombreHijo}</h3>
+
+                                                                                    <p>
+                                                                                        <b:commandButton value="Escoge un Juguete" action="#{jugueteCT.consultarJuguetePorGeneroYEdad(item.edadHijo,item.sexoHijo, item.idPedido)}" update=":formularioLista" class="btn btn-info " >
+                                                                                            <b:iconAwesome name="send"></b:iconAwesome>
+                                                                                        </b:commandButton>
+
+                                                                                    </p>
+                                                                                </f:facet>
+                                                                            </b:thumbnail>
+                                                                        </b:column>
+
+                                                                    </c:forEach>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </center>
+                                            </b:column>
+
+                                        </b:row>
+
+                                    </c:when>
+
+
+                                    <c:when test="${jugueteCT.vista == 1}">
+                                        <b:row>
+                                            <b:column  >
+                                                <center>
+                                                    <div class="widget ">
+                                                        <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                                            <h3>
+                                                                Escoge un Artículo para ${jugueteCT.pedido.nombreHijo} (${jugueteCT.pedido.edadHijo} años)
+                                                            </h3>
+                                                        </div>
+                                                        <!-- /widget-header -->
+                                                        <div class="widget-content">
+                                                            <div class="widget big-stats-container">
+                                                                <div class="widget-content img-responsive" > 
+
+
+                                                                    <c:forEach items="#{jugueteCT.inventarios}" var="item">           
+                                                                        <b:column col-sm="6" col-md="4">
+                                                                            <b:thumbnail>
+
+                                                                                <img  src=".././resources/images/#{item.url1}.jpg" alt="Articulo"/>
+                                                                                <!--<img  src=".././resources/images/JUGUETES.png" alt="Generic placeholder thumbnail"/>-->
+
+                                                                                <f:facet name="caption">
+                                                                                    <h3>#{item.nombre}</h3>
+
+                                                                                    <p>
+                                                                                        <b:commandButton value="Ver Ficha" action="#{jugueteCT.consultarJuguetePorId(item.idInventario, 1)}" ajax="true" class="btn btn-info " style="margin-right: 10px;">
+                                                                                            <b:iconAwesome name="send"></b:iconAwesome>
+                                                                                        </b:commandButton>
+
+                                                                                        <b:commandButton value="Quiero Este!" action="Confirmacion Seleccion" update=":formularioLista" class="btn btn-info " >
+                                                                                            <b:iconAwesome name="send"></b:iconAwesome>
+                                                                                        </b:commandButton>
+                                                                                    </p>
+                                                                                </f:facet>
+                                                                            </b:thumbnail>
+                                                                        </b:column>
+
+                                                                    </c:forEach>
+                                                                    <b:column>
+                                                                        <b:commandButton value="Volver Atras" action="#{jugueteCT.atras()}" class="btn btn-danger "  style="margin-right: 10px;">
+                                                                            <b:iconAwesome name="fa fa-arrow-left"></b:iconAwesome>
+                                                                        </b:commandButton>
+                                                                    </b:column>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </center>
+                                            </b:column>                                           
+                                        </b:row>
+                                    </c:when>
+                                    <c:otherwise></c:otherwise>
+                                </c:choose>
+                            </h:form>
+                        </b:container>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

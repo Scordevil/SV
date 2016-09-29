@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./Template/template.xhtml">
+
+            <ui:define name="menu">
+
+                <ul class="mainnav">
+                    <li >
+                        <h:link outcome="Dashboard">
+                            <i class="fa fa-home"></i><span>Dashboard</span>                                 
+                        </h:link>
+                    </li>
+                    <li class="active">
+                        <h:link outcome="Empresa">
+                            <i class="fa fa-building"></i><span>Empresas</span> 
+                        </h:link>
+                    </li>         
+                    <li >
+                        <h:link outcome="Usuario">
+                            <i class="fa fa-user"></i><span>Usuarios</span> 
+                        </h:link>
+                    </li>   
+                    <li>
+                        <h:link outcome="Inventario">
+                            <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
+                        </h:link>
+                    </li>
+
+                    <li>
+                        <h:link outcome="Comite">
+                            <i class="fa fa-users"></i><span>Comite </span> 
+                        </h:link>
+                    </li>
+                </ul>
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="main">
+                    <div class="main-inner">
+
+                        <b:container fluid="true">
+                            <center>
+                                <div style="margin-bottom: 30px">
+                                    <h2> Empresas <small>puedes registrar, consultar, modificar y 
+                                            eliminar los registros de las empresas asociadas.</small> </h2>
+                                </div>
+                            </center>
+
+                            <b:row>
+                                <b:column col-lg="5" >
+                                    <div class="widget " >
+                                        <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                            <h3>Registro de Empresas</h3>
+                                        </div>
+                                        <!-- /widget-header -->
+                                        <div class="widget-content">
+                                            <div class="widget big-stats-container">
+                                                <div class="widget-content">
+                                                    <h:form id="formularioRegistro" enctype="multipart/form-data">
+                                                        <p:growl id="msg" showDetail="true" autoUpdate="true"/>
+                                                        <div class="form-horizontal">
+                                                            <div class="form-group">
+                                                                <label for="inputNombre" class=" control-label" >Nombre Empresa: </label>
+                                                                <p:inputText id="inputNombre" placeholder="Nombre de la empresa" class="form-control" value="#{empresaCT.empresa.nombre}" requiredMessage="El Campo Nombre es Requerido"  required ="true" />     
+                                                                <p:message for="inputNombre" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputDireccion" class=" control-label">Direccion: </label>
+                                                                <p:inputText class="form-control" id="inputDireccion" placeholder="Direccion" value="#{empresaCT.empresa.direccion}" requiredMessage="El Campo Direccion es Requerido" required ="true"/>
+                                                                <p:message for="inputDireccion" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputNit" class=" control-label">NIT: </label>
+                                                                <p:inputText class="form-control" id="inputNit" placeholder="Nit" value="#{empresaCT.empresa.nit}" requiredMessage="El Campo Empresa es Requerido" required ="true"/>
+                                                                <p:message for="inputNit" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputTelefono" class=" control-label">Telefono: </label>
+                                                                <p:inputText class="form-control" id="inputTelefono" placeholder="Telefono" value="#{empresaCT.empresa.telefono}" requiredMessage="El Campo Telefono es Requerido" required ="true"/>
+                                                                <p:message for="inputTelefono" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputComite" class=" control-label">La empresa tiene comite: </label>
+                                                                <h:selectOneMenu id="inputComite" class="form-control" value="#{empresaCT.empresa.comite}" requiredMessage="Seleccione valor" required ="true">
+                                                                    <f:selectItem itemLabel="Si" itemValue="1"/>
+                                                                    <f:selectItem itemLabel="No" itemValue="0"/>
+                                                                </h:selectOneMenu>
+                                                                <p:message for="inputComite" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputCorreo" class="control-label">Correo: </label>
+                                                                <p:inputText class="form-control" id="inputCorreo" placeholder="Correo" value="#{empresaCT.empresa.correo}" requiredMessage="El Campo Correo es Requerido" required ="true"/>
+                                                                <p:message for="inputCorreo" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrlLogo" class="control-label">Logo: </label>
+                                                                <p:outputLabel value="#{empresaCT.imagenLogo}"/>                                                              
+                                                                <p:fileUpload id="imgLogo" value="#{empresaCT.logo}" mode="simple" label="Seleccione archivo" /> 
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrlBanner" class="control-label">Banner: </label>
+                                                                <p:outputLabel value="#{empresaCT.imagenBanner}"/>                                                              
+                                                                <p:fileUpload id="imgBanner" value="#{empresaCT.banner}" mode="simple" label="Seleccione archivo" /> 
+                                                            </div>
+                                                            <hr/>
+                                                            <div align="right">
+                                                                <h:panelGrid columns="2">
+                                                                    <p:commandButton action="#{empresaCT.cancelar()}" process="@this" immediate="true" 
+                                                                                     update=":formularioRegistro" class=" btn btn-danger" value="Cancelar"/>
+                                                                    <p:commandButton action="#{empresaCT.metodo()}" ajax="false" 
+                                                                                     update=":formularioRegistro :formularioLista" class=" btn btn-info" value="#{empresaCT.nombreOperacion}"/>
+                                                                </h:panelGrid>
+                                                            </div>
+                                                        </div>
+                                                    </h:form>
+                                                    <!-- /widget-content --> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b:column>
+                                <!-- /widget -->
+
+
+                                <b:column col-lg="7" >
+                                    <h:form id="formularioLista">
+                                        <div class="widget ">
+                                            <div class="widget-header"> <i class="fa fa-list-alt"></i>
+                                                <h3> Listado de Empresas</h3>
+                                            </div>
+                                            <!-- /widget-header -->
+                                            <div class="widget-content">
+                                                <div class="widget big-stats-container">
+                                                    <div class="widget-content">
+                                                        <h:form id="formularioLista">
+                                                            <p:dataTable  class="table-responsive" style="width: 100%" value="#{empresaCT.empresas}" var="empresa" rows="10"
+                                                                          paginator="true"
+                                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                          rowsPerPageTemplate="5,10,15" emptyMessage="Empresas no registradas">
+                                                                <p:column headerText="Razon social">
+                                                                    <h:outputLabel value="#{empresa.nombre}"/>
+                                                                </p:column>
+                                                                <p:column headerText="NIT">
+                                                                    <h:outputLabel value="#{empresa.nit}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Telefono">
+                                                                    <h:outputLabel value="#{empresa.telefono}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Correo">
+                                                                    <h:outputLabel value="#{empresa.correo}"/>
+                                                                </p:column>
+                                                                <p:column style="width: 60px" headerText="Editar">
+                                                                    <p:commandLink style="color: white; width: 100%" process="@this" update=":formularioRegistro" action="#{empresaCT.seleccionarCRUD(1)}" title="Modificar" class="btn btn-block btn-info">
+                                                                        <f:setPropertyActionListener value="#{empresa}" target="#{empresaCT.empresa}"/>
+                                                                        <i class="fa fa-pencil"/> 
+                                                                    </p:commandLink>
+                                                                </p:column>
+                                                                <p:column style="width: 60px" headerText="Eliminar">
+                                                                    <p:commandLink style="color: white; width: 100%" action="#{empresaCT.eliminar()}" process="@this" update=":formularioLista :formularioRegistro:msg" title="Eliminar" class="btn btn-block btn-danger">
+                                                                        <f:setPropertyActionListener value="#{empresa}" target="#{empresaCT.empresa}"/>
+                                                                        <i class="fa fa-trash"/>                                                     
+                                                                    </p:commandLink>
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </h:form>
+                                                    </div>
+                                                    <!-- /widget-content --> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </b:column>
+                            </b:row>
+
+                            <!-- /row --> 
+                            <!-- /container --> 
+                        </b:container>
+
+                    </div>
+                    <!-- /main-inner --> 
+                </div>
+                <!-- /main -->    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

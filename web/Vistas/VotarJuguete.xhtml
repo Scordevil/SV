@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./Template/template.xhtml">
+
+            <ui:define name="content">
+
+                <div class="main">
+                    <div class="main-inner">
+                        <b:container fluid="true">
+                            <b:row>
+                                <h:form id="formularioLista">
+                                    <b:column  >
+                                        <center>
+                                            <div class="widget ">
+                                                <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                                    <h3>Filtre para ver los juguetes de su preferencia</h3>
+                                                </div>
+                                                <!-- /widget-header -->
+                                                <div class="widget-content">
+                                                    <div class="widget big-stats-container">
+                                                        <div class="widget-content img-responsive" > 
+
+                                                            <div class="form-group" >
+
+                                                                <table width="100%">
+                                                                    <tr>
+                                                                        <td><strong><label for="inputDesde" class="control-label">Rango Edad Desde: </label></strong></td>
+                                                                        <td><strong><label for="inputHasta" class="control-label">Rango Edad Hasta: </label></strong></td>
+                                                                        <td><strong><label for="inputGenero" class="control-label">Genero: </label></strong></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>         
+                                                                            <p:inputText class="form-control" id="inputDesde" placeholder="Rango Edad Desde" value="#{jugueteCT.juguete.edadDesde}" requiredMessage="El Campo Desde es Requerido" required ="true"/>                                                            
+
+                                                                            <p:message for="inputDesde" ></p:message>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p:inputText class="form-control" id="inputHasta" placeholder="Rango Edad Hasta" value="#{jugueteCT.juguete.edadHasta}" requiredMessage="El Campo Hasta es Requerido" required ="true"/>                                                            
+
+                                                                            <p:message for="inputHasta" ></p:message>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group">
+                                                                                <h:selectOneMenu id="inputGenero" class="form-control " style="margin-top: 10px;" value="#{jugueteCT.juguete.genero}" requiredMessage="El Campo Genero es Requerido" required ="true">
+                                                                                    <f:selectItem itemLabel="Seleccione genero" noSelectionOption="true"/>
+                                                                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>  
+                                                                                    <f:selectItem itemLabel="Unisex" itemValue="A"/>
+                                                                                </h:selectOneMenu>
+                                                                                <p:message for="inputGenero" ></p:message>
+
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr >
+                                                                        <td colspan="3"><center>
+                                                                                <p:commandButton icon="fa fa-search" style="margin-top: 10px;" value="Buscar!" action="#{jugueteCT.filtrarJuguetesPorGeneroYEdad()}" update=":formularioJuguetes" class="btn btn-info " >
+
+                                                                                </p:commandButton>
+                                                                            </center>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </b:column>    
+                                </h:form>
+                                <h:form id="formularioJuguetes">
+                                    <p:growl id="msg" showDetail="true" life="3000"/>
+                                    <b:column  >
+                                        <center>
+                                            <div class="widget ">
+                                                <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                                    <h3>Vota por el Juguete de su Preferencia</h3>
+                                                </div>
+                                                <!-- /widget-header -->
+                                                <div class="widget-content">
+                                                    <div class="widget big-stats-container">
+                                                        <div class="widget-content img-responsive" > 
+
+                                                            <c:forEach items="#{jugueteCT.inventarios}" var="item">           
+                                                                <b:column col-sm="6" col-md="4">
+                                                                    <b:thumbnail>
+                                                                        <img  src=".././resources/images/#{item.url1}" alt="Generic placeholder thumbnail"/>
+
+                                                                        <f:facet name="caption">
+                                                                            <h3>#{item.nombre}</h3>
+                                                                            <p align="left"><strong>Calificacion:</strong></p>
+                                                                            <p:rating onRate="#{votacionCT.setJuguete(item)}" stars="5" value="#{votacionCT.votacion.calificacion}">
+                                                                                <p:ajax event="rate" listener="#{votacionCT.onrate}"/>                                                                              
+                                                                            </p:rating><br/>
+                                                                            <hr/>
+                                                                            <h:panelGrid columns="2">
+                                                                                <b:commandButton value="Ver Ficha" action="#{jugueteCT.consultarJuguetePorId(item.idInventario , 2)}" update=":formularioLista" class="btn btn-info " style="margin-right: 10px;">
+                                                                                    <b:iconAwesome name="send"></b:iconAwesome>
+                                                                                </b:commandButton>                                                                                
+                                                                            </h:panelGrid>                                                                        
+                                                                        </f:facet>
+                                                                    </b:thumbnail>
+                                                                </b:column>
+                                                            </c:forEach>
+                                                            <center>
+                                                                <b:commandButton style="width: 60%" value="Votar!" action="#{votacionCT.registrarVotaciones()}" update=":formularioJuguetes" class="btn btn-info " >
+                                                                    <b:iconAwesome name="star"></b:iconAwesome>
+                                                                </b:commandButton>
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </b:column>  
+                                </h:form>
+                            </b:row>
+                        </b:container>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./Template/template.xhtml">
+
+
+            <ui:define name="menu">
+
+                <ul class="mainnav">
+                    <li >
+                        <h:link outcome="Dashboard">
+                            <i class="fa fa-home"></i><span>Dashboard</span>                                 
+                        </h:link>
+                    </li>
+                    <li>
+                        <h:link outcome="Empresa">
+                            <i class="fa fa-building"></i><span>Empresas</span> 
+                        </h:link>
+                    </li>         
+                    <li >
+                        <h:link outcome="Usuario">
+                            <i class="fa fa-user"></i><span>Usuarios</span> 
+                        </h:link>
+                    </li>   
+                    <li class="active">
+                        <h:link outcome="Inventario">
+                            <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
+                        </h:link>
+                    </li>
+
+                    <li>
+                        <h:link outcome="Comite">
+                            <i class="fa fa-users"></i><span>Comite </span> 
+                        </h:link>
+                    </li>
+                </ul>
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="main">
+                    <div class="main-inner">
+
+                        <b:container fluid="true">
+                            <center>
+                                <div style="margin-bottom: 30px">
+                                    <h2> Inventarios <small>puedes registrar, consultar, modificar y 
+                                            eliminar los registros de los inventarios.</small> </h2>
+                                </div>
+
+                            </center>
+                            <b:row>
+                                <b:column col-lg="5" >
+                                    <div class="widget ">
+                                        <div class="widget-header"> <i class="fa fa-list-ol"></i>
+                                            <h3>Registro de Juguetes</h3>
+                                        </div>
+                                        <!-- /widget-header -->
+                                        <div class="widget-content">
+                                            <div class="widget big-stats-container">
+                                                <div class="widget-content">
+                                                    <h:form id="formularioRegistro">
+                                                        <p:growl id="msg" showDetail="true" life="3000"/>
+                                                        <div class="form-horizontal">
+
+                                                            <div class="form-group">
+                                                                <label for="SEmpresa" class="control-label">Empresa </label>
+                                                                <h:selectOneMenu id="SEmpresa" class="form-control "  value="#{jugueteCT.juguete.idEmpresa.idEmpresa}" requiredMessage="El Campo Empresa es requerido" required ="true">
+                                                                    <f:selectItem itemLabel="Seleccione empresa" noSelectionOption="true"/>
+                                                                    <f:selectItems value="#{empresaCT.empresas}" var="empresa" itemLabel="#{empresa.nombre}" itemValue="#{empresa.idEmpresa}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:message for="inputGenero" ></p:message>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputCodigo" class="control-label">Codigo del juguete: </label>
+                                                                <p:inputText class="form-control" id="inputCodigo" placeholder="Codigo del juguete" value="#{jugueteCT.juguete.codigo}" requiredMessage="El Campo Codigo Juguete es Requerido" required="true"/>                                                            
+                                                                <p:message for="inputCodigo"> </p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputNombre" class="control-label">Nombre Juguete: </label>
+                                                                <p:inputText class="form-control" id="inputNombre" placeholder="Nombre del juguete" value="#{jugueteCT.juguete.nombre}" requiredMessage="El Campo Nombre es Requerido" required ="true"/>
+                                                                <p:message for="inputNombre" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputDescripcion" class="control-label">Descripcion: </label>
+                                                                <p:inputTextarea id="inputDescripcion" rows="3"  class="form-control" placeholder="Descripcion" value="#{jugueteCT.juguete.descripcion}" requiredMessage="El Campo Descripcion es Requerido" required ="true"/>                                                            
+                                                                <p:message for="inputDescripcion" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputEdadDesde" class="control-label">Edad desde: </label>
+                                                                <p:inputText class="form-control" id="inputEdadDesde" placeholder="Edad minima" value="#{jugueteCT.juguete.edadDesde}" requiredMessage="El Campo Edad Desde es Requerido" required ="true"/>    
+                                                                <p:message for="inputEdadDesde" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputEdadHasta" class="control-label">Edad Hasta: </label>
+                                                                <p:inputText class="form-control" id="inputEdadHasta" placeholder="Edad maxima" value="#{jugueteCT.juguete.edadHasta}" requiredMessage="El Campo Edad Hasta es Requerido" required ="true"/>  
+                                                                <p:message for="inputEdadHasta" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputGenero" class="control-label">Genero: </label>
+                                                                <h:selectOneMenu id="inputGenero" class="form-control "  value="#{jugueteCT.juguete.genero}" requiredMessage="El Campo Genero es Requerido" required ="true">
+                                                                    <f:selectItem itemLabel="Seleccione genero" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>  
+                                                                    <f:selectItem itemLabel="Unisex" itemValue="A"/>
+                                                                </h:selectOneMenu>
+                                                                <p:message for="inputGenero" ></p:message>
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputCantidad" class="control-label">Cantidad: </label>
+                                                                <p:inputText class="form-control"  id="inputCantidad" placeholder="Cantidad" value="#{jugueteCT.juguete.cantidad}" requiredMessage="El Campo Cantidad es Requerido" required ="true"/> 
+                                                                <p:message for="inputCantidad" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label id="" for="inputObservacion" class="control-label">Observacion: </label>
+                                                                <p:inputTextarea class="form-control" id="inputObservacion" rows="10" placeholder="Observacion" value="#{jugueteCT.juguete.observacion}" />                                                            
+                                                                <p:message for="inputObservacion" ></p:message>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl1" class="control-label">Url 1: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url1}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl2" class="control-label">Url 2: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url2}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl3" class="control-label">Url 3: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url3}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl4" class="control-label">Url 4: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url4}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl5" class="control-label">Url 5: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url5}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl6" class="control-label">Url 6: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url6}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl7" class="control-label">Url 7: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url7}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl8" class="control-label">Url 8: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen"  value="#{jugueteCT.juguete.url8}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl9" class="control-label">Url 9: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen"  value="#{jugueteCT.juguete.url9}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl10" class="control-label">Url 10: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url10}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl11" class="control-label">Url 11: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url11}"/>                                                            
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputUrl2" class="control-label">Url 12: </label>
+                                                                <p:inputText class="form-control" placeholder="url de la imagen" value="#{jugueteCT.juguete.url12}"/>                                                            
+                                                            </div>
+
+                                                            <div align="right">
+                                                                <h:panelGrid columns="2">
+                                                                    <p:commandButton action="#{jugueteCT.cancelar()}" process="@this" immediate="true" 
+                                                                                     update=":formularioRegistro" class=" btn btn-danger" value="Cancelar"/>
+                                                                    <p:commandButton action="#{jugueteCT.metodo()}"
+                                                                                     update=":formularioRegistro :formularioLista" class=" btn btn-info" value="#{jugueteCT.nombreOperacion}"/>
+                                                                </h:panelGrid>
+                                                            </div>                                                           
+
+                                                        </div>
+                                                    </h:form>
+                                                    <!-- /widget-content --> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b:column>
+                                <!-- /widget -->
+
+
+                                <b:column col-lg="7" >
+                                    <h:form id="formularioLista">
+                                        <div class="widget ">
+                                            <div class="widget-header"> <i class="fa fa-list-alt"></i>
+                                                <h3> Listado de Juguetes</h3>
+                                            </div>
+                                            <!-- /widget-header -->
+                                            <div class="widget-content">
+                                                <div class="widget big-stats-container">
+                                                    <div class="widget-content">
+                                                        <h:form id="formularioLista">
+                                                            <div class="form-group">
+                                                                <label for="inputEmpresa" class="col-sm-4 control-label">Nombre Empresa: </label>
+                                                                <h:selectOneMenu id="inputEmpresa" class="form-control "  style="width: 66.6666666% !important;"  value="#{jugueteCT.empresa.idEmpresa}" >
+                                                                    <p:ajax event="change" listener="#{jugueteCT.consultarJuguetesPorEmpresa()}" update="DTEmpleados"/>
+                                                                    <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
+                                                                    <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                                                    <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:message for="inputEmpresa" ></p:message>
+                                                            </div>  
+                                                            <p:dataTable id="DTEmpleados" value="#{jugueteCT.inventarios}" var="inventario" rows="10"
+                                                                         paginator="true"
+                                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                         rowsPerPageTemplate="5,10,15" emptyMessage="Juguetes no registrados">
+                                                                <p:column headerText="Codigo">
+                                                                    <h:outputLabel value="#{inventario.codigo}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Nombre">
+                                                                    <h:outputLabel value="#{inventario.nombre}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Edad Min">
+                                                                    <h:outputLabel value="#{inventario.edadDesde}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Edad Max">
+                                                                    <h:outputLabel value="#{inventario.edadHasta}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Genero">
+                                                                    <h:outputLabel value="#{inventario.genero}"/>
+                                                                </p:column>  
+                                                                <p:column headerText="Cantidad">
+                                                                    <h:outputLabel value="#{inventario.cantidad}"/>
+                                                                </p:column> 
+                                                                <p:column style="width: 60px" headerText="Editar">
+                                                                    <p:commandLink style="color: white; width: 100%" process="@this" update=":formularioRegistro" action="#{jugueteCT.seleccionarCRUD(1)}" title="Modificar" class="btn btn-block btn-info">
+                                                                        <f:setPropertyActionListener value="#{inventario}" target="#{jugueteCT.juguete}"/>
+                                                                        <i class="fa fa-pencil"/> 
+                                                                    </p:commandLink>
+                                                                </p:column>
+                                                                <p:column style="width: 60px" headerText="Eliminar">
+                                                                    <p:commandLink style="color: white; width: 100%" action="#{jugueteCT.eliminar()}" process="@this" update=":formularioLista :formularioRegistro:msg" title="Eliminar" class="btn btn-block btn-danger">
+                                                                        <f:setPropertyActionListener value="#{inventario}" target="#{jugueteCT.juguete}"/>
+                                                                        <i class="fa fa-trash"/>                                                     
+                                                                    </p:commandLink>
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </h:form>
+                                                    </div>
+                                                    <!-- /widget-content --> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </b:column>
+
+                                <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                    <h:form id="formulario" enctype="multipart/form-data">
+                                        <b:column col-lg="7" >
+                                            <div class="widget ">
+                                                <div class="widget-header"> <i class="fa fa-list-alt"></i>
+                                                    <h3> Carga masiva de Inventario</h3>
+                                                </div>
+                                                <!-- /widget-header -->
+                                                <div class="widget-content">
+                                                    <div class="widget big-stats-container">
+                                                        <div class="widget-content">
+                                                            <div class="form-group">
+                                                                <br/>
+                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva: </label>                                               
+                                                                <p:fileUpload id="imgLogo" value="#{jugueteCT.excel}" mode="simple" label="Seleccione archivo"   /> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <b:commandButton action="#{jugueteCT.uploadExcel()}" ajax="false" class=" btn btn-info"  value="Aceptar">
+                                                                    <b:iconAwesome name="Aceptar"/>
+                                                                </b:commandButton>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /widget-content --> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </b:column>
+                                    </h:form>
+                                </c:if>
+                            </b:row>
+                            <!-- /row --> 
+                            <!-- /container --> 
+                        </b:container>
+
+                    </div>
+                    <!-- /main-inner --> 
+                </div>
+                <!-- /main -->    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
