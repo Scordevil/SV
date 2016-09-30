@@ -591,12 +591,12 @@ public class JugueteCT {
             String path = UtilPath.getUrlDefinida(ec.getRealPath("/"));
 
             String string = path;
-            String quitar1 = "NetBeansProjects";
+            String quitar1 = "Documents";
             String[] parts = string.split(quitar1);
             String part1 = parts[0]; // 004
             String part2 = parts[1]; // 034556
 
-            String realPath = part1 + "web" + File.separator + "archivos" + File.separator + excel.getFileName();
+            String realPath = part1 + "Dropbox" + File.separator + "Cargas" + File.separator + excel.getFileName();
 //        if(guardarArchivos(realPath, file)){
 //            extraerDatos(realPath);
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
