@@ -349,4 +349,6 @@ public class UsuarioCT implements Serializable{
     public void onComplete() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Progress Completed"));
     }
+    
+    
 }
