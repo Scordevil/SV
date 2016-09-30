@@ -79,33 +79,7 @@
                             <ui:insert name="menu"></ui:insert>
                         </c:when>
                         <c:when test="#{sesionCT.obtenerSesion().idTipoUsuario.idTipoUsuario == 2}">
-                            <ul class="mainnav">
-                                <li class="active">
-                                    <h:link outcome="Dashboard">
-                                        <i class="fa fa-home"></i><span>Dashboard</span>                                 
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link outcome="Empresa">
-                                        <i class="fa fa-building"></i><span>Empresas</span> 
-                                    </h:link>
-                                </li>         
-                                <li>
-                                    <h:link outcome="Usuario">
-                                        <i class="fa fa-user"></i><span>Usuarios</span> 
-                                    </h:link>
-                                </li>   
-                                <li>
-                                    <h:link outcome="Inventario">
-                                        <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
-                                    </h:link>
-                                </li> 
-                                <li>
-                                    <h:link outcome="Comite">
-                                        <i class="fa fa-users"></i><span>Comite </span> 
-                                    </h:link>
-                                </li>
-                            </ul>
+                            <ui:insert name="menu"></ui:insert>
                         </c:when>
                         <c:when test="#{sesionCT.obtenerSesion().idTipoUsuario.idTipoUsuario == 3}">
                             <ul class="mainnav">
