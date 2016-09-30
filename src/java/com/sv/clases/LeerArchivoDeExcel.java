@@ -36,7 +36,7 @@ public class LeerArchivoDeExcel {
 
     }
 
-    public static void registrarUsuarioYPedido(String path) throws IOException, BiffException {
+    public static void registrarUsuarioYPedido(String path, int idEmpresa) throws IOException, BiffException {
         
         Workbook workbook = Workbook.getWorkbook(new File(path)); //Pasamos el excel que vamos a leer
         Sheet sheet = workbook.getSheet(0); //Seleccionamos la hoja que vamos a leer
@@ -90,7 +90,7 @@ public class LeerArchivoDeExcel {
             usuario.getIdCiudad().setIdCiudad(2);
             usuario.getIdTipoUsuario().setIdTipoUsuario(4);
             usuario.getIdDepartamento().setIdDepartamento(1);
-            usuario.getIdEmpresa().setIdEmpresa(6);
+            usuario.getIdEmpresa().setIdEmpresa(idEmpresa);
 
             pedido.setNombreHijo(hijo.trim());
             pedido.setSexoHijo(sexo.trim());

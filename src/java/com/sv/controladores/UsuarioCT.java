@@ -298,7 +298,8 @@ public class UsuarioCT {
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
 //        }
 
-            LeerArchivoDeExcel.registrarUsuarioYPedido(realPath);
+            
+            LeerArchivoDeExcel.registrarUsuarioYPedido(realPath,usuario.getIdEmpresa().getIdEmpresa());
         }
     }
 

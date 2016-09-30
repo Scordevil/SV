@@ -32,6 +32,11 @@
             <redirect/>
         </navigation-case>  
         <navigation-case>
+            <from-outcome>Inventario Masiva</from-outcome>
+            <to-view-id>/Vistas/Inventario_Masiva.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case> 
+        <navigation-case>
             <from-outcome>Seleccion de Juguetes</from-outcome>
             <to-view-id>/Vistas/SeleccionJuguete.xhtml</to-view-id>
             <redirect/>

@@ -22,12 +22,12 @@
                     </li>
                     <li >
                         <h:link outcome="Empresa">
-                            <i class="fa fa-user"></i><span>Empresas</span> 
+                            <i class="fa fa-building"></i><span>Empresas</span> 
                         </h:link>
                     </li> 
                     <li class="dropdown active" id="abrir-menu" >
                         <a href=""  data-toggle="dropdown"> 
-                            <i class="fa fa-area-chart"></i><span>Usuarios</span> <b class="caret"></b>                                
+                            <i class="fa fa-user"></i><span>Usuarios</span> <b class="caret"></b>                                
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -43,15 +43,29 @@
                                 </li>
                             </c:if>
                         </ul>
-                    </li> 
+                    </li>         
 
-                    <li>
-                        <h:link outcome="Inventario">
-                            <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
-                        </h:link>
-                    </li>
+                    <li class="dropdown" id="abrir-menu" >
+                        <a href=""  data-toggle="dropdown"> 
+                            <i class="fa fa-file-archive-o"></i><span>Inventario</span> <b class="caret"></b>                                
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:link outcome="Inventario">
+                                    <span>Carga Manual</span> 
+                                </h:link>
+                            </li>
+                            <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                <li>
+                                    <h:link outcome="Inventario_Masiva">
+                                        <span>Carga Masiva</span> 
+                                    </h:link>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </li>   
 
-                    <li>
+                    <li >
                         <h:link outcome="Comite">
                             <i class="fa fa-users"></i><span>Comite </span> 
                         </h:link>
@@ -92,9 +106,21 @@
                                                                     <div class="widget big-stats-container">
                                                                         <div class="widget-content">
                                                                             <div class="form-group">
+                                                                                <label for="inputEmp" class="col-sm-8 control-label">Nombre Empresa: </label>
+                                                                                <h:selectOneMenu id="inputEmp" class="form-control "    value="#{usuarioCT.usuario.idEmpresa.idEmpresa}" >
+                                                                                    
+                                                                                    <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
+                                                                                    <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
+
+
+                                                                                </h:selectOneMenu>
+                                                                                <p:message for="inputEmp" ></p:message>
+                                                                            </div>   
+                                                                            <div class="form-group">
                                                                                 <br/>
                                                                                 <p:growl id="messages" showDetail="true" />
                                                                                 <label for="inputUrlLogo" class="control-label">Carga Masiva Usuarios: </label>
+                                                                            <br/>
                                                                                 <p:outputLabel value="#{usuarioCT.archivoExcel}"/>                                                              
                                                                                 <p:fileUpload id="imgLogo" value="#{usuarioCT.excel}" mode="simple" skinSimple="true" label="Seleccione archivo" /> 
                                                                             </div>

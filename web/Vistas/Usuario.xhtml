@@ -11,7 +11,6 @@
     <body>
 
         <ui:composition template="./Template/template.xhtml">
-
             <ui:define name="menu">
 
                 <ul class="mainnav">
@@ -22,12 +21,12 @@
                     </li>
                     <li >
                         <h:link outcome="Empresa">
-                            <i class="fa fa-user"></i><span>Empresas</span> 
+                            <i class="fa fa-building"></i><span>Empresas</span> 
                         </h:link>
                     </li> 
                     <li class="dropdown active" id="abrir-menu" >
                         <a href=""  data-toggle="dropdown"> 
-                            <i class="fa fa-area-chart"></i><span>Usuarios</span> <b class="caret"></b>                                
+                            <i class="fa fa-user"></i><span>Usuarios</span> <b class="caret"></b>                                
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -43,15 +42,29 @@
                                 </li>
                             </c:if>
                         </ul>
-                    </li> 
-                  
-                    <li>
-                        <h:link outcome="Inventario">
-                            <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
-                        </h:link>
-                    </li>
+                    </li>         
 
-                    <li>
+                    <li class="dropdown" id="abrir-menu" >
+                        <a href=""  data-toggle="dropdown"> 
+                            <i class="fa fa-file-archive-o"></i><span>Inventario</span> <b class="caret"></b>                                
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:link outcome="Inventario">
+                                    <span>Carga Manual</span> 
+                                </h:link>
+                            </li>
+                            <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                <li>
+                                    <h:link outcome="Inventario_Masiva">
+                                        <span>Carga Masiva</span> 
+                                    </h:link>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </li>   
+
+                    <li >
                         <h:link outcome="Comite">
                             <i class="fa fa-users"></i><span>Comite </span> 
                         </h:link>
