@@ -200,13 +200,13 @@ public class UsuarioCT {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
         usuario = new Usuario();
-        if (Sesion.obtenerSesion().getIdTipoUsuario().getIdTipoUsuario() == 1) {
-            usuarios = usuarioDao.consultarUsuarios();
-        } else if (Sesion.obtenerSesion().getIdTipoUsuario().getIdTipoUsuario() == 2) {
-            Empresa emp = new Empresa();
-            emp.setIdEmpresa(usuario.getIdEmpresa().getIdEmpresa());
-            usuarios = usuarioDao.ConsultarUsuariosSegunEmpresa(emp);
-        }
+//        if (Sesion.obtenerSesion().getIdTipoUsuario().getIdTipoUsuario() == 1) {
+//            usuarios = usuarioDao.consultarUsuarios();
+//        } else if (Sesion.obtenerSesion().getIdTipoUsuario().getIdTipoUsuario() == 2) {
+//            Empresa emp = new Empresa();
+//            emp.setIdEmpresa(usuario.getIdEmpresa().getIdEmpresa());
+//            usuarios = usuarioDao.ConsultarUsuariosSegunEmpresa(emp);
+//        }
     }
 
     public void modificar() {
