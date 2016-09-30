@@ -48,7 +48,7 @@
                                                                                     <h3>#{item.nombreHijo}</h3>
 
                                                                                     <p>
-                                                                                        <b:commandButton value="Escoge un Juguete" action="#{jugueteCT.consultarJuguetePorGeneroYEdad(item.edadHijo,item.sexoHijo, item.idPedido)}" update=":formularioLista" class="btn btn-info " >
+                                                                                        <b:commandButton value="Escoge un Juguete" action="#{jugueteCT.consultarJuguetePorGeneroYEdad(item.edadHijo,item.sexoHijo.trim(), item.idPedido)}" update=":formularioLista" class="btn btn-info " >
                                                                                             <b:iconAwesome name="send"></b:iconAwesome>
                                                                                         </b:commandButton>
 

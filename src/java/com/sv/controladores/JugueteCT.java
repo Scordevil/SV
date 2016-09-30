@@ -294,6 +294,7 @@ public class JugueteCT {
     }
 
     public void consultarJuguetePorGeneroYEdad(int edad, String genero, int idPedido) {
+        System.out.println("prueba: "+edad+"-"+genero+"-"+idPedido);
         InventarioDao inventarioDao = new InventarioDao();
         inventarios = inventarioDao.ConsultarJuguetesEdadGenero(edad, genero);
         vista++;
