@@ -12,6 +12,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.sv.clases.LeerArchivoDeExcel;
 import com.sv.clases.Sesion;
 import com.sv.clases.Upload;
+import com.sv.clases.UtilPath;
 import com.sv.dao.ComiteDao;
 import com.sv.dao.InventarioDao;
 import com.sv.dao.PedidoDao;
@@ -30,9 +31,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import jxl.read.biff.BiffException;
 import org.primefaces.event.ItemSelectEvent;
+import org.primefaces.model.UploadedFile;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -56,7 +59,7 @@ public class JugueteCT {
     private int vista;
     private String buscar;
     private Empresa empresa;
-    private File excel = new File("");
+    private UploadedFile excel;
 
     private LineChartModel animatedModel1;
     private BarChartModel animatedModel2;
@@ -213,12 +216,20 @@ public class JugueteCT {
         this.calificacion = calificacion;
     }
 
-    public File getExcel() {
+    public UploadedFile getExcel() {
         return excel;
     }
 
-    public void setExcel(File excel) {
+    public void setExcel(UploadedFile excel) {
         this.excel = excel;
+    }
+
+    public int getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(int operacion) {
+        this.operacion = operacion;
     }
 
     //Metodos
@@ -294,7 +305,7 @@ public class JugueteCT {
     }
 
     public void consultarJuguetePorGeneroYEdad(int edad, String genero, int idPedido) {
-        System.out.println("prueba: "+edad+"-"+genero+"-"+idPedido);
+        System.out.println("prueba: " + edad + "-" + genero + "-" + idPedido);
         InventarioDao inventarioDao = new InventarioDao();
         inventarios = inventarioDao.ConsultarJuguetesEdadGenero(edad, genero);
         vista++;
@@ -388,7 +399,7 @@ public class JugueteCT {
         }
 
         for (int i = 1; i <= urls; i++) {
-            images.add(juguete.getCodigo()+"-"+ i +".jpg");
+            images.add(juguete.getCodigo() + "-" + i + ".jpg");
         }
 
         String link = "";
@@ -567,15 +578,33 @@ public class JugueteCT {
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
     }
-    
-        public void uploadExcel() throws IOException, BiffException {
-    //    String destino;
+
+    public void uploadExcel(int idEmpresa) throws IOException, BiffException {
+        //    String destino;
 //        HashMap<String, String> map = Upload.getMapPathLogosEmpresa();
 //        destino = map.get("path");
 //        if (null != excel) {
 
-            LeerArchivoDeExcel le = new LeerArchivoDeExcel();
-            le.registrarMasivaInventario();
+        if (null != excel) {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+
+            String path = UtilPath.getUrlDefinida(ec.getRealPath("/"));
+
+            String string = path;
+            String quitar1 = "NetBeansProjects";
+            String[] parts = string.split(quitar1);
+            String part1 = parts[0]; // 004
+            String part2 = parts[1]; // 034556
+
+            String realPath = part1 + "web" + File.separator + "archivos" + File.separator + excel.getFileName();
+//        if(guardarArchivos(realPath, file)){
+//            extraerDatos(realPath);
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
+//        }
+
+            LeerArchivoDeExcel.registrarMasivaInventario(realPath, idEmpresa);
+        }
+
 //        }
     }
 

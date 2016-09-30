@@ -88,6 +88,7 @@
                             <b:row>
                                 <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
                                     <h:form id="formulario" enctype="multipart/form-data">
+                                        <p:growl showDetail="true" autoUpdate="true" life="3000"/>
                                         <b:column col-lg="5" >
                                             <div class="widget ">
                                                 <div class="widget-header"> <i class="fa fa-list-ol"></i>
@@ -109,15 +110,28 @@
                                                                     <div class="widget big-stats-container">
                                                                         <div class="widget-content">
                                                                             <div class="form-group">
+                                                                                <label for="inputEmp" class="col-sm-8 control-label">Nombre Empresa: </label>
+                                                                                <h:selectOneMenu id="inputEmp" class="form-control "    value="#{usuarioCT.usuario.idEmpresa.idEmpresa}" >
+
+                                                                                    <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
+                                                                                    <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
+
+
+                                                                                </h:selectOneMenu>
+                                                                                <p:message for="inputEmp" ></p:message>
+                                                                            </div>   
+                                                                            <div class="form-group">
                                                                                 <br/>
-                                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva: </label>                                               
-                                                                                <p:fileUpload id="imgLogo" value="#{jugueteCT.excel}" mode="simple" label="Seleccione archivo"   /> 
+                                                                                <p:growl id="messages" showDetail="true" />
+                                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva Usuarios: </label>
+                                                                                <br/>
+                                                                                                                                         
+                                                                                <p:fileUpload id="imgLogo" value="#{jugueteCT.excel}" mode="simple" skinSimple="true" label="Seleccione archivo" /> 
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <b:commandButton action="#{jugueteCT.uploadExcel()}" ajax="false" class=" btn btn-info"  value="Aceptar">
-                                                                                    <b:iconAwesome name="Aceptar"/>
-                                                                                </b:commandButton>
+                                                                                <p:commandButton class="btn btn-info" value="Aceptar" ajax="false" actionListener="#{jugueteCT.uploadExcel(usuarioCT.usuario.idEmpresa.idEmpresa)}" disabled="false" />
                                                                             </div>
+                                                                            <p:growl id="growl" />
                                                                         </div>
                                                                         <!-- /widget-content --> 
                                                                     </div>
@@ -180,7 +194,7 @@
                                                                 <p:column headerText="Cantidad">
                                                                     <h:outputLabel value="#{inventario.cantidad}"/>
                                                                 </p:column> 
-                                
+
                                                             </p:dataTable>
                                                         </h:form>
                                                     </div>

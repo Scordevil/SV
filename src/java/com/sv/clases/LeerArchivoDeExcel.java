@@ -32,7 +32,7 @@ public class LeerArchivoDeExcel {
 
     public static void main(String[] args) throws IOException, BiffException {
 
-        registrarMasivaInventario();
+//        registrarMasivaInventario();
 
     }
 
@@ -112,9 +112,9 @@ public class LeerArchivoDeExcel {
         }
     }
 
-    public static void registrarMasivaInventario() throws IOException, BiffException {
+    public static void registrarMasivaInventario(String path, int idEmpresa) throws IOException, BiffException {
 
-        Workbook workbook = Workbook.getWorkbook(new File("C:\\Users\\Jose\\Downloads\\Formato Sala Virtual - Carga Articulos.xls")); //Pasamos el excel que vamos a leer
+        Workbook workbook = Workbook.getWorkbook(new File(path)); //Pasamos el excel que vamos a leer
         Sheet sheet = workbook.getSheet(0); //Seleccionamos la hoja que vamos a leer
         String sku = "", nombre = "", descripcion = "", genero = "", url1 = "", url2 = "", url3 = "", url4 = "", url5 = "", url6 = "", url7 = "", url8 = "", url9 = "", url10 = "", url11 = "", url12 = "", observacion = "";
         int cantidad = 0, rangoD = 0, rangoH = 0;
@@ -169,7 +169,7 @@ public class LeerArchivoDeExcel {
             inventario.setUrl12(url12.trim());
             inventario.setCantidad(cantidad);
             inventario.setObservacion(observacion.trim());
-            inventario.setIdEmpresa(new Empresa(6));
+            inventario.setIdEmpresa(new Empresa(idEmpresa));
 
             InventarioDao inventarioDAO = new InventarioDao();
 
