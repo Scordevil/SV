@@ -17,6 +17,7 @@ import com.sv.modelos.Tipousuario;
 import com.sv.modelos.Usuario;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +34,9 @@ import org.primefaces.model.UploadedFile;
  *
  * @author VaioDevelopment
  */
-public class UsuarioCT {
+public class UsuarioCT implements Serializable{
 
+    private Integer progress;
     private Usuario usuario;
     private List<Usuario> usuarios;
     private List<Usuario> usuariosTipoEmpleado;
@@ -298,8 +300,7 @@ public class UsuarioCT {
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
 //        }
 
-            
-            LeerArchivoDeExcel.registrarUsuarioYPedido(realPath,usuario.getIdEmpresa().getIdEmpresa());
+            LeerArchivoDeExcel.registrarUsuarioYPedido(realPath, usuario.getIdEmpresa().getIdEmpresa());
         }
     }
 
@@ -325,5 +326,27 @@ public class UsuarioCT {
         String name = "";
         name = nombre;
         System.out.println("pruebas--------------***************" + name);
+    }
+
+    public Integer getProgress() {
+        if (progress == null) {
+            progress = 0;
+        } else {
+            progress = progress + (int) (Math.random() * 35);
+
+            if (progress > 100) {
+                progress = 100;
+            }
+        }
+
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
+
+    public void onComplete() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Progress Completed"));
     }
 }
