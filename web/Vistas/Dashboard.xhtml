@@ -196,31 +196,49 @@
 
                                                             <p:column>
                                                                 <f:facet name="header">
-                                                                    <h:outputText value="Codigo" />
+                                                                    <h:outputText value="Cedula" />
                                                                 </f:facet>
-                                                                <h:outputText value="#{inv.codigo}" />
+                                                                <h:outputText value="" />
                                                             </p:column>
 
                                                             <p:column>
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Nombre"/>
                                                                 </f:facet>
-                                                                <h:outputText value="#{inv.nombre}" />
+                                                                <h:outputText value="" />
                                                             </p:column>
 
+                                                            <p:column>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Ciudad" />
+                                                                </f:facet>
+                                                                <h:outputText value=""/>
+
+                                                            </p:column>
+
+                                                            <p:column>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="nombres hijos" />
+                                                                </f:facet>
+                                                                <h:outputText value="" />
+                                                            </p:column>
+                                                            <p:column>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Edad" />
+                                                                </f:facet>
+                                                                <h:outputText value="" />
+                                                            </p:column>
                                                             <p:column>
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Genero" />
                                                                 </f:facet>
-                                                                <h:outputText value="#{inv.genero.trim()}" />
-
+                                                                <h:outputText value="" />
                                                             </p:column>
-
                                                             <p:column>
                                                                 <f:facet name="header">
-                                                                    <h:outputText value="Descripcion" />
+                                                                    <h:outputText value="Articulo Seleccionado" />
                                                                 </f:facet>
-                                                                <h:outputText value="#{inv.descripcion}" />
+                                                                <h:outputText value="" />
                                                             </p:column>
                                                         </p:dataTable>
 
@@ -261,7 +279,7 @@
                                 <!--
                                                                 <b:column col-lg="8" >
                                                                     <h:form>
-                                                                        <p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
+                                                                        <p:dataTable id="tbl" var="car" value="ataExporterView.cars}"
                                                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                                                                      paginator="true" rows="5" style="margin-bottom:20px">
                                 
@@ -291,21 +309,21 @@
                                                                                 <f:facet name="header">
                                                                                     <h:outputText value="Nombre"/>
                                                                                 </f:facet>
-                                                                                <h:outputText value="#{car.year}" />
+                                                                                <h:outputText value="car.year}" />
                                                                             </p:column>
                                 
                                                                             <p:column>
                                                                                 <f:facet name="header">
                                                                                     <h:outputText value="Email" />
                                                                                 </f:facet>
-                                                                                <h:outputText value="#{car.brand}" />
+                                                                                <h:outputText value="car.brand}" />
                                                                             </p:column>
                                 
                                                                             <p:column>
                                                                                 <f:facet name="header">
                                                                                     <h:outputText value="Nombre Empresa" />
                                                                                 </f:facet>
-                                                                                <h:outputText value="#{car.color}" />
+                                                                                <h:outputText value="car.color}" />
                                                                             </p:column>
                                                                         </p:dataTable>
                                 
