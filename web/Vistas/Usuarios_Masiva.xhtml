@@ -5,7 +5,8 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -34,13 +35,16 @@
                                     <span>Carga Manual</span> 
                                 </h:link>
                             </li>
-                            <li>
-                                <h:link outcome="Usuarios_Masiva">
-                                    <span>Carga Masiva</span> 
-                                </h:link>
-                            </li>
+                            <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                <li>
+                                    <h:link outcome="Usuarios_Masiva">
+                                        <span>Carga Masiva</span> 
+                                    </h:link>
+                                </li>
+                            </c:if>
                         </ul>
                     </li> 
+
                     <li>
                         <h:link outcome="Inventario">
                             <i class="fa fa-file-archive-o"></i><span>Inventario </span> 
@@ -58,87 +62,51 @@
             <ui:define name="content">
                 <div class="main">
                     <div class="main-inner">
-
                         <b:container fluid="true">
                             <center>
                                 <div style="margin-bottom: 30px">
-                                    <h2> Empresas <small>puedes registrar, consultar, modificar y 
-                                            eliminar los registros de las empresas asociadas.</small> </h2>
+                                    <h2 > Usuarios <small >puedes registrar, consultar, modificar y 
+                                            eliminar los registros de los Usuarios asociadas.</small> </h2>
                                 </div>
                             </center>
-
                             <b:row>
                                 <b:column col-lg="5" >
-                                    <div class="widget " >
+                                    <div class="widget ">
                                         <div class="widget-header"> <i class="fa fa-list-ol"></i>
-                                            <h3>Registro de Empresas</h3>
+                                            <h3>Registro de Usuario</h3>
                                         </div>
                                         <!-- /widget-header -->
                                         <div class="widget-content">
                                             <div class="widget big-stats-container">
                                                 <div class="widget-content">
-                                                    <h:form id="formularioRegistro" enctype="multipart/form-data">
-                                                        <p:growl id="msg" showDetail="true" autoUpdate="true"/>
-                                                        <div class="form-horizontal">
-                                                            <div class="form-group">
-                                                                <label for="inputNombre" class=" control-label" >Nombre Empresa: </label>
-                                                                <p:inputText id="inputNombre" placeholder="Nombre de la empresa" class="form-control" value="#{empresaCT.empresa.nombre}" requiredMessage="El Campo Nombre es Requerido"  required ="true" />     
-                                                                <p:message for="inputNombre" ></p:message>
+                                                    <h:form id="formularioRegistro">
+                                                        <p:growl showDetail="true" autoUpdate="true" life="3000"/>
+                                                        <div class="form-horizontal">                                                            
+
+                                                            <div class="widget ">
+                                                                <div class="widget-header"> <i class="fa fa-list-alt"></i>
+                                                                    <h3> Carga masiva de Usuarios</h3>
+                                                                </div>
+                                                                <!-- /widget-header -->
+                                                                <div class="widget-content">
+                                                                    <div class="widget big-stats-container">
+                                                                        <div class="widget-content">
+                                                                            <div class="form-group">
+                                                                                <br/>
+                                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva: </label>                                               
+                                                                                <p:fileUpload id="imgLogo" value="#{usuarioCT.excel}" mode="simple" label="Seleccione archivo"   /> 
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <b:commandButton action="#{usuarioCT.uploadExcel()}" ajax="false" class=" btn btn-info"  value="Aceptar">
+                                                                                    <b:iconAwesome name="Aceptar"/>
+                                                                                </b:commandButton>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- /widget-content --> 
+                                                                    </div>
+                                                                </div>
                                                             </div>
 
-                                                            <div class="form-group">
-                                                                <label for="inputDireccion" class=" control-label">Direccion: </label>
-                                                                <p:inputText class="form-control" id="inputDireccion" placeholder="Direccion" value="#{empresaCT.empresa.direccion}" requiredMessage="El Campo Direccion es Requerido" required ="true"/>
-                                                                <p:message for="inputDireccion" ></p:message>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputNit" class=" control-label">NIT: </label>
-                                                                <p:inputText class="form-control" id="inputNit" placeholder="Nit" value="#{empresaCT.empresa.nit}" requiredMessage="El Campo Empresa es Requerido" required ="true"/>
-                                                                <p:message for="inputNit" ></p:message>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputTelefono" class=" control-label">Telefono: </label>
-                                                                <p:inputText class="form-control" id="inputTelefono" placeholder="Telefono" value="#{empresaCT.empresa.telefono}" requiredMessage="El Campo Telefono es Requerido" required ="true"/>
-                                                                <p:message for="inputTelefono" ></p:message>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputComite" class=" control-label">La empresa tiene comite: </label>
-                                                                <h:selectOneMenu id="inputComite" class="form-control" value="#{empresaCT.empresa.comite}" requiredMessage="Seleccione valor" required ="true">
-                                                                    <f:selectItem itemLabel="Si" itemValue="1"/>
-                                                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                                                </h:selectOneMenu>
-                                                                <p:message for="inputComite" ></p:message>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputCorreo" class="control-label">Correo: </label>
-                                                                <p:inputText class="form-control" id="inputCorreo" placeholder="Correo" value="#{empresaCT.empresa.correo}" requiredMessage="El Campo Correo es Requerido" required ="true"/>
-                                                                <p:message for="inputCorreo" ></p:message>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputUrlLogo" class="control-label">Logo: </label>
-                                                                <p:outputLabel value="#{empresaCT.imagenLogo}"/>                                                              
-                                                                <p:fileUpload id="imgLogo" value="#{empresaCT.logo}" mode="simple" label="Seleccione archivo" /> 
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputUrlBanner" class="control-label">Banner: </label>
-                                                                <p:outputLabel value="#{empresaCT.imagenBanner}"/>                                                              
-                                                                <p:fileUpload id="imgBanner" value="#{empresaCT.banner}" mode="simple" label="Seleccione archivo" /> 
-                                                            </div>
-                                                            <hr/>
-                                                            <div align="right">
-                                                                <h:panelGrid columns="2">
-                                                                    <p:commandButton action="#{empresaCT.cancelar()}" process="@this" immediate="true" 
-                                                                                     update=":formularioRegistro" class=" btn btn-danger" value="Cancelar"/>
-                                                                    <p:commandButton action="#{empresaCT.metodo()}" ajax="false" 
-                                                                                     update=":formularioRegistro :formularioLista" class=" btn btn-info" value="#{empresaCT.nombreOperacion}"/>
-                                                                </h:panelGrid>
-                                                            </div>
                                                         </div>
                                                     </h:form>
                                                     <!-- /widget-content --> 
@@ -154,41 +122,60 @@
                                     <h:form id="formularioLista">
                                         <div class="widget ">
                                             <div class="widget-header"> <i class="fa fa-list-alt"></i>
-                                                <h3> Listado de Empresas</h3>
+                                                <h3> Listado de Usuarios</h3>
                                             </div>
                                             <!-- /widget-header -->
                                             <div class="widget-content">
                                                 <div class="widget big-stats-container">
                                                     <div class="widget-content">
-                                                        <h:form id="formularioLista">
-                                                            <p:dataTable  class="table-responsive" style="width: 100%" value="#{empresaCT.empresas}" var="empresa" rows="10"
-                                                                          paginator="true"
-                                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                          rowsPerPageTemplate="5,10,15" emptyMessage="Empresas no registradas">
-                                                                <p:column headerText="Razon social">
-                                                                    <h:outputLabel value="#{empresa.nombre}"/>
-                                                                </p:column>
-                                                                <p:column headerText="NIT">
-                                                                    <h:outputLabel value="#{empresa.nit}"/>
+                                                        <h:form id="formularioLista" enctype="multipart/form-data">
+                                                            <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                                                <div class="form-group">
+                                                                    <label for="inputEmpresa" class="col-sm-4 control-label">Nombre Empresa: </label>
+                                                                    <h:selectOneMenu id="inputEmpresa" class="form-control "  style="width: 66.6666666% !important;"  value="#{usuarioCT.usuario.idEmpresa.idEmpresa}" >
+                                                                        <p:ajax event="change" listener="#{usuarioCT.consultarUsuariosPorEmpresas()}" update="user"/>
+                                                                        <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
+                                                                        <c:if test="${usuarioCT.idTipoUsuario == 1}">
+                                                                            <f:selectItem itemLabel="Todos" itemValue="999999999"/>
+                                                                        </c:if>
+                                                                        <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
+
+
+                                                                    </h:selectOneMenu>
+                                                                    <p:message for="inputEmpresa" ></p:message>
+                                                                </div>    
+                                                            </c:if>
+                                                            <p:dataTable   class="table-responsive" style="width: 100%"  value="#{usuarioCT.usuarios}" var="usuario" id="user">
+                                                                <p:column headerText="Nombre">
+                                                                    <h:outputLabel value="#{usuario.nombre}"/>
                                                                 </p:column>
                                                                 <p:column headerText="Telefono">
-                                                                    <h:outputLabel value="#{empresa.telefono}"/>
+                                                                    <h:outputLabel value="#{usuario.telefono}"/>
                                                                 </p:column>
-                                                                <p:column headerText="Correo">
-                                                                    <h:outputLabel value="#{empresa.correo}"/>
+                                                                <p:column headerText="Email" style="width: 200px" >
+                                                                    <h:outputLabel value="#{usuario.email}"/>
                                                                 </p:column>
-                                                                <p:column style="width: 60px" headerText="Editar">
-                                                                    <p:commandLink style="color: white; width: 100%" process="@this" update=":formularioRegistro" action="#{empresaCT.seleccionarCRUD(1)}" title="Modificar" class="btn btn-block btn-info">
-                                                                        <f:setPropertyActionListener value="#{empresa}" target="#{empresaCT.empresa}"/>
-                                                                        <i class="fa fa-pencil"/> 
-                                                                    </p:commandLink>
+                                                                <p:column headerText="Tipo Usuario">
+                                                                    <h:outputLabel value="#{usuario.idTipoUsuario.nombre}"/>
                                                                 </p:column>
-                                                                <p:column style="width: 60px" headerText="Eliminar">
-                                                                    <p:commandLink style="color: white; width: 100%" action="#{empresaCT.eliminar()}" process="@this" update=":formularioLista :formularioRegistro:msg" title="Eliminar" class="btn btn-block btn-danger">
-                                                                        <f:setPropertyActionListener value="#{empresa}" target="#{empresaCT.empresa}"/>
-                                                                        <i class="fa fa-trash"/>                                                     
-                                                                    </p:commandLink>
-                                                                </p:column>
+                                                                <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                                                    <p:column headerText="Empresa">
+                                                                        <h:outputLabel value="#{usuario.idEmpresa.nombre}"/>
+                                                                    </p:column>  
+
+                                                                    <p:column style="width: 60px" headerText="Editar">
+                                                                        <p:commandLink style="color: white; width: 100%" process="@this" update=":formularioRegistro" action="#{usuarioCT.seleccionarCRUD(1)}" title="Modificar" class="btn btn-block btn-info">
+                                                                            <f:setPropertyActionListener value="#{usuario}" target="#{usuarioCT.usuario}"/>
+                                                                            <i class="fa fa-pencil"/> 
+                                                                        </p:commandLink>
+                                                                    </p:column>
+                                                                    <p:column style="width: 60px" headerText="Eliminar">
+                                                                        <p:commandLink style="color: white; width: 100%" action="#{usuarioCT.eliminar()}" process="@this" update=":formularioLista" title="Eliminar" class="btn btn-block btn-danger">
+                                                                            <f:setPropertyActionListener value="#{usuario}" target="#{usuarioCT.usuario}"/>
+                                                                            <i class="fa fa-trash"/>                                                     
+                                                                        </p:commandLink>
+                                                                    </p:column>
+                                                                </c:if>
                                                             </p:dataTable>
                                                         </h:form>
                                                     </div>
@@ -198,12 +185,41 @@
                                         </div>
                                     </h:form>
                                 </b:column>
-                            </b:row>
 
+<!--                                <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                    <h:form id="formulario" enctype="multipart/form-data">
+                                        <b:column col-lg="7" >
+                                            <div class="widget ">
+                                                <div class="widget-header"> <i class="fa fa-list-alt"></i>
+                                                    <h3> Carga masiva de Usuarios</h3>
+                                                </div>
+                                                 /widget-header 
+                                                <div class="widget-content">
+                                                    <div class="widget big-stats-container">
+                                                        <div class="widget-content">
+                                                            <div class="form-group">
+                                                                <br/>
+                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva: </label>                                               
+                                                                <p:fileUpload id="imgLogo" value="#{usuarioCT.excel}" mode="simple" label="Seleccione archivo"   /> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <b:commandButton action="#{usuarioCT.uploadExcel()}" ajax="false" class=" btn btn-info"  value="Aceptar">
+                                                                    <b:iconAwesome name="Aceptar"/>
+                                                                </b:commandButton>
+                                                            </div>
+                                                        </div>
+                                                         /widget-content  
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </b:column>
+                                    </h:form>
+                                </c:if>-->
+                            </b:row>
                             <!-- /row --> 
                             <!-- /container --> 
                         </b:container>
-
                     </div>
                     <!-- /main-inner --> 
                 </div>

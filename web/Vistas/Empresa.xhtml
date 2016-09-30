@@ -5,7 +5,8 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -34,11 +35,13 @@
                                     <span>Carga Manual</span> 
                                 </h:link>
                             </li>
-                            <li>
-                                <h:link outcome="Usuarios_Masiva">
-                                    <span>Carga Masiva</span> 
-                                </h:link>
-                            </li>
+                            <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                <li>
+                                    <h:link outcome="Usuarios_Masiva">
+                                        <span>Carga Masiva</span> 
+                                    </h:link>
+                                </li>
+                            </c:if>
                         </ul>
                     </li>  
                     <li>

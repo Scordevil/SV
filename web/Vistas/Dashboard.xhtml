@@ -35,11 +35,13 @@
                                     <span>Carga Manual</span> 
                                 </h:link>
                             </li>
-                            <li>
-                                <h:link outcome="Usuarios_Masiva">
-                                    <span>Carga Masiva</span> 
-                                </h:link>
-                            </li>
+                            <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
+                                <li>
+                                    <h:link outcome="Usuarios_Masiva">
+                                        <span>Carga Masiva</span> 
+                                    </h:link>
+                                </li>
+                            </c:if>
                         </ul>
                     </li> 
                     <li>
