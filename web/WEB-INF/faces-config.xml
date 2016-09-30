@@ -12,8 +12,8 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>Empresa</from-outcome>
-            <to-view-id>/Vistas/Empresa_Masiva.xhtml</to-view-id>
+            <from-outcome>Usuarios Masiva</from-outcome>
+            <to-view-id>/Vistas/Usuarios_Masiva.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
