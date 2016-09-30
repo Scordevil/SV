@@ -33,31 +33,39 @@
                                                         <div class="widget-content">
                                                             <div class="widget big-stats-container">
                                                                 <div class="widget-content img-responsive" > 
+                                                                    <c:if test="#{pedidoCT.pedidos.size() >= 1}">
+                                                                        <c:forEach items="#{pedidoCT.pedidos}" var="item">           
+                                                                            <b:column col-sm="6" col-md="4">
+                                                                                <b:thumbnail>
 
-                                                                    <c:forEach items="#{pedidoCT.pedidos}" var="item">           
+                                                                                    <c:if test="${item.sexoHijo.trim() == 'M'}">
+                                                                                        <img  src=".././resources/images/ninos.png" alt="Generic placeholder thumbnail"/>
+                                                                                    </c:if>
+                                                                                    <c:if test="${item.sexoHijo.trim() == 'F'}">
+                                                                                        <img  src=".././resources/images/ninas.png" alt="Generic placeholder thumbnail"/>
+                                                                                    </c:if>
+                                                                                    <f:facet name="caption">
+                                                                                        <h3>#{item.nombreHijo}</h3>
+
+                                                                                        <p>
+                                                                                            <b:commandButton value="Escoge un Juguete" action="#{jugueteCT.consultarJuguetePorGeneroYEdad(item.edadHijo,item.sexoHijo.trim(), item.idPedido)}" update=":formularioLista" class="btn btn-info " >
+                                                                                                <b:iconAwesome name="send"></b:iconAwesome>
+                                                                                            </b:commandButton>
+
+                                                                                        </p>
+                                                                                    </f:facet>
+                                                                                </b:thumbnail>
+                                                                            </b:column>
+
+                                                                        </c:forEach>
+                                                                    </c:if>
+                                                                    <c:if test="#{pedidoCT.pedidos.size() == 0}">
                                                                         <b:column col-sm="6" col-md="4">
                                                                             <b:thumbnail>
-
-                                                                                <c:if test="${item.sexoHijo.trim() == 'M'}">
-                                                                                    <img  src=".././resources/images/ninos.png" alt="Generic placeholder thumbnail"/>
-                                                                                </c:if>
-                                                                                <c:if test="${item.sexoHijo.trim() == 'F'}">
-                                                                                    <img  src=".././resources/images/ninas.png" alt="Generic placeholder thumbnail"/>
-                                                                                </c:if>
-                                                                                <f:facet name="caption">
-                                                                                    <h3>#{item.nombreHijo}</h3>
-
-                                                                                    <p>
-                                                                                        <b:commandButton value="Escoge un Juguete" action="#{jugueteCT.consultarJuguetePorGeneroYEdad(item.edadHijo,item.sexoHijo.trim(), item.idPedido)}" update=":formularioLista" class="btn btn-info " >
-                                                                                            <b:iconAwesome name="send"></b:iconAwesome>
-                                                                                        </b:commandButton>
-
-                                                                                    </p>
-                                                                                </f:facet>
+                                                                                <p>#{pedidoCT.informacion}</p>
                                                                             </b:thumbnail>
                                                                         </b:column>
-
-                                                                    </c:forEach>
+                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -101,9 +109,9 @@
                                                                                             <b:iconAwesome name="send"></b:iconAwesome>
                                                                                         </b:commandButton>
 
-                                                                                        <b:commandButton value="Quiero Este!" action="Confirmacion Seleccion" update=":formularioLista" class="btn btn-info " >
-                                                                                            <b:iconAwesome name="send"></b:iconAwesome>
-                                                                                        </b:commandButton>
+                                                                                        <!--                                                                                        <b:commandButton value="Quiero Este!" action="Confirmacion Seleccion" update=":formularioLista" class="btn btn-info " >
+                                                                                                                                                                                    <b:iconAwesome name="send"></b:iconAwesome>
+                                                                                                                                                                                </b:commandButton>-->
                                                                                     </p>
                                                                                 </f:facet>
                                                                             </b:thumbnail>

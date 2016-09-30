@@ -21,10 +21,12 @@ public class PedidoCT {
 
     private Pedido pedido;
     private List<Pedido> pedidos;
+    private String informacion;
 
     public PedidoCT() {
         pedido = new Pedido();
         pedidos = new ArrayList<>();
+        informacion = "";
     }
 
     @PostConstruct
@@ -32,6 +34,11 @@ public class PedidoCT {
         PedidoDao pedidoDao = new PedidoDao();
         //   pedido.getIdUsuario().setIdUsuario(3);
         pedidos = pedidoDao.ConsultarPedidoPorId(Sesion.obtenerSesion().getIdUsuario());
+
+        if (pedidos.isEmpty()) {
+
+            quitarAccesos();
+        }
 
     }
 
@@ -50,6 +57,17 @@ public class PedidoCT {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
+    public String getInformacion() {
+        return informacion;
+    }
+
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
+    }
+    
+    
+    
 
 //        //Metodos
 //    public void registrar(){
@@ -75,14 +93,23 @@ public class PedidoCT {
         ped.setIdPedido(idPedido);
         valor = pedidoDao.EditarPedido(ped);
 
-        if (valor == 1) {
-            UsuarioDao usuarioDao = new UsuarioDao();
-            usuarioDao.quitarAcceso(idUsuario);
-        }
-
+//        if (valor == 1) {
+//            UsuarioDao usuarioDao = new UsuarioDao();
+//            usuarioDao.quitarAcceso(idUsuario);
+//        }
         link = "Login";
 
         return link;
+
+    }
+
+    public void quitarAccesos() {
+
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+        usuarioDao.quitarAcceso(Sesion.obtenerSesion().getIdUsuario());
+//        
+        informacion = "Ya usted a seleccionado lo(s) Articulo para su(s) hijo(s). Por favor cierre Sesion";
 
     }
 

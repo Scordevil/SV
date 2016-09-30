@@ -21,9 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import jxl.read.biff.BiffException;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -265,16 +267,35 @@ public class UsuarioCT {
         usuariosTipoEmpleado = usuarioDao.ConsultarUsuariosSegunEmpresa(empresa);
     }
 
-    public void uploadExcel() throws IOException, BiffException {
-//        String destino;
-//        HashMap<String, String> map = Upload.getMapPathLogosEmpresa();
-//        destino = map.get("path");
+    public void uploadExcel(FileUploadEvent event) throws IOException, BiffException {
+        
+        UploadedFile file = event.getFile();   
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+    
+//        String path = Rute.getUrlDefinida(ec.getRealPath("/"));
+//        String realPath = path + File.separator + "web" + File.separator + "archivos" + File.separator + file.getFileName();
+//        if(guardarArchivos(realPath, file)){
+//            extraerDatos(realPath);
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
+//        }
+
         if (null != excel) {
 
             LeerArchivoDeExcel le = new LeerArchivoDeExcel();
             le.registrarUsuarioYPedido();
         }
     }
+
+//    public void uploadExcel() throws IOException, BiffException {
+////        String destino;
+////        HashMap<String, String> map = Upload.getMapPathLogosEmpresa();
+////        destino = map.get("path");
+//        if (null != excel) {
+//
+//            LeerArchivoDeExcel le = new LeerArchivoDeExcel();
+//            le.registrarUsuarioYPedido();
+//        }
+//    }
 
     public void deshabilitarEmpresa() {
         if (usuario.getIdTipoUsuario().getIdTipoUsuario() == 1 || usuario.getIdTipoUsuario().getIdTipoUsuario() == 2) {
