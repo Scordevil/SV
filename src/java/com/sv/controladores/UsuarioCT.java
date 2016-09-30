@@ -285,7 +285,14 @@ public class UsuarioCT {
             ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 
             String path = UtilPath.getUrlDefinida(ec.getRealPath("/"));
-            String realPath = path + File.separator + "web" + File.separator + "archivos" + File.separator + excel.getFileName();
+
+            String string = path;
+            String quitar1 = "NetBeansProjects";
+            String[] parts = string.split(quitar1);
+            String part1 = parts[0]; // 004
+            String part2 = parts[1]; // 034556
+
+            String realPath = part1 + "web" + File.separator + "archivos" + File.separator + excel.getFileName();
 //        if(guardarArchivos(realPath, file)){
 //            extraerDatos(realPath);
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
@@ -312,10 +319,10 @@ public class UsuarioCT {
             deshabilitar = false;
         }
     }
-    
-    public void prueba(String nombre){
-    String name = "";
-    name = nombre;
-        System.out.println("pruebas--------------***************"+name);
+
+    public void prueba(String nombre) {
+        String name = "";
+        name = nombre;
+        System.out.println("pruebas--------------***************" + name);
     }
 }
