@@ -72,7 +72,7 @@
 
                                 <b:column col-lg="8" >
 
-                                    <div class="widget ">
+                                    <div class="widget " >
                                         <div class="widget-header"> <i class="fa fa-list-alt"></i>
                                             <h3> Los Articulos Mas Votados </h3>
                                         </div>
@@ -83,7 +83,7 @@
                                                     <h:form>
                                                         <p:dataTable id="tbl" var="inv" value="#{jugueteCT.inventariosMasVotados}"
                                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                                                     paginator="true" rows="10" style="margin-bottom:20px">
+                                                                     paginator="true" rows="3" style="margin-bottom:20px">
 
                                                             <f:facet name="{Exporters}">
                                                                 <h:commandLink>
@@ -147,7 +147,7 @@
                                         <div class="widget-content">
                                             <h:form>
                                                 <h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
-                                                    <p:chart type="bar" model="#{jugueteCT.animatedModel2}" style="width:350px;" />
+                                                    <p:chart type="bar" model="#{jugueteCT.animatedModel3}" style="width:350px;" />
 
                                                 </h:panelGrid>
                                             </h:form>
@@ -170,7 +170,7 @@
                                                     <h:form>
                                                         <p:dataTable id="tbl" var="inv" value="#{jugueteCT.inventariosMasSeleccionados}"
                                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                                                     paginator="true" rows="5" style="margin-bottom:20px">
+                                                                     paginator="true" rows="3" style="margin-bottom:20px">
 
                                                             <f:facet name="{Exporters}">
                                                                 <h:commandLink>
@@ -198,7 +198,8 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Genero" />
                                                                 </f:facet>
-                                                                <h:outputText value="#{inv.genero}" />
+                                                                <h:outputText value="#{inv.genero.trim()}" />
+
                                                             </p:column>
 
                                                             <p:column>
@@ -234,7 +235,7 @@
                                         <div class="widget-content">
                                             <h:form>
                                                 <h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
-                                                    <p:chart type="bar" model="#{jugueteCT.animatedModel3}" style="width:350px;" />
+                                                    <p:chart type="bar" model="#{jugueteCT.animatedModel2}" style="width:350px;" />
 
                                                 </h:panelGrid>
                                             </h:form>
@@ -243,85 +244,85 @@
                                     </div>                                
                                 </b:column>
 
-<!--
-                                <b:column col-lg="8" >
-                                    <h:form>
-                                        <p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
-                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                                     paginator="true" rows="5" style="margin-bottom:20px">
-
-                                            <f:facet name="{Exporters}">
-                                                <h:commandLink>
-                                                    <p:graphicImage name="./images/excel.png"  style="width:30px;height:30px" />
-                                                    <p:dataExporter type="xls" target="tbl" fileName="Reporte" />
-                                                </h:commandLink>
-
-                                                <h:commandLink>
-                                                    <p:graphicImage name="./images/pdf.png" style="width:30px;height:30px" />
-                                                    <p:dataExporter type="pdf" target="tbl" fileName="Reporte"/>
-                                                </h:commandLink>
-
-                                                <h:commandLink>
-                                                    <p:graphicImage name="./images/csv.png" style="width:30px;height:30px" />
-                                                    <p:dataExporter type="csv" target="tbl" fileName="Reporte" />
-                                                </h:commandLink>
-
-                                                <h:commandLink>
-                                                    <p:graphicImage name="./images/xml.png" style="width:30px;height:30px" />
-                                                    <p:dataExporter type="xml" target="tbl" fileName="Reporte" />
-                                                </h:commandLink>
-                                            </f:facet>
-
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Nombre"/>
-                                                </f:facet>
-                                                <h:outputText value="#{car.year}" />
-                                            </p:column>
-
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Email" />
-                                                </f:facet>
-                                                <h:outputText value="#{car.brand}" />
-                                            </p:column>
-
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Nombre Empresa" />
-                                                </f:facet>
-                                                <h:outputText value="#{car.color}" />
-                                            </p:column>
-                                        </p:dataTable>
-
-                                        <h3>Descarga Tus Reportes</h3>
-                                        <h:commandLink>
-                                            <p:graphicImage name="./images/excel.png"  style="width:30px;height:30px" />
-                                            <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
-                                        </h:commandLink>
-
-                                        <h:commandLink>
-                                            <p:graphicImage name="./images/pdf.png" style="width:30px;height:30px" />
-                                            <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
-                                        </h:commandLink>
-
-                                        <h:commandLink>
-                                            <p:graphicImage name="./images/csv.png" style="width:30px;height:30px" />
-                                            <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" />
-                                        </h:commandLink>
-
-                                        <h:commandLink>
-                                            <p:graphicImage name="./images/xml.png" style="width:30px;height:30px" />
-                                            <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" />
-                                        </h:commandLink>
-                                    </h:form>
-                                </b:column>
--->                                <b:column col-lg="4" >
+                                <!--
+                                                                <b:column col-lg="8" >
+                                                                    <h:form>
+                                                                        <p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
+                                                                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                                                                     paginator="true" rows="5" style="margin-bottom:20px">
+                                
+                                                                            <f:facet name="{Exporters}">
+                                                                                <h:commandLink>
+                                                                                    <p:graphicImage name="./images/excel.png"  style="width:30px;height:30px" />
+                                                                                    <p:dataExporter type="xls" target="tbl" fileName="Reporte" />
+                                                                                </h:commandLink>
+                                
+                                                                                <h:commandLink>
+                                                                                    <p:graphicImage name="./images/pdf.png" style="width:30px;height:30px" />
+                                                                                    <p:dataExporter type="pdf" target="tbl" fileName="Reporte"/>
+                                                                                </h:commandLink>
+                                
+                                                                                <h:commandLink>
+                                                                                    <p:graphicImage name="./images/csv.png" style="width:30px;height:30px" />
+                                                                                    <p:dataExporter type="csv" target="tbl" fileName="Reporte" />
+                                                                                </h:commandLink>
+                                
+                                                                                <h:commandLink>
+                                                                                    <p:graphicImage name="./images/xml.png" style="width:30px;height:30px" />
+                                                                                    <p:dataExporter type="xml" target="tbl" fileName="Reporte" />
+                                                                                </h:commandLink>
+                                                                            </f:facet>
+                                
+                                                                            <p:column>
+                                                                                <f:facet name="header">
+                                                                                    <h:outputText value="Nombre"/>
+                                                                                </f:facet>
+                                                                                <h:outputText value="#{car.year}" />
+                                                                            </p:column>
+                                
+                                                                            <p:column>
+                                                                                <f:facet name="header">
+                                                                                    <h:outputText value="Email" />
+                                                                                </f:facet>
+                                                                                <h:outputText value="#{car.brand}" />
+                                                                            </p:column>
+                                
+                                                                            <p:column>
+                                                                                <f:facet name="header">
+                                                                                    <h:outputText value="Nombre Empresa" />
+                                                                                </f:facet>
+                                                                                <h:outputText value="#{car.color}" />
+                                                                            </p:column>
+                                                                        </p:dataTable>
+                                
+                                                                        <h3>Descarga Tus Reportes</h3>
+                                                                        <h:commandLink>
+                                                                            <p:graphicImage name="./images/excel.png"  style="width:30px;height:30px" />
+                                                                            <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
+                                                                        </h:commandLink>
+                                
+                                                                        <h:commandLink>
+                                                                            <p:graphicImage name="./images/pdf.png" style="width:30px;height:30px" />
+                                                                            <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
+                                                                        </h:commandLink>
+                                
+                                                                        <h:commandLink>
+                                                                            <p:graphicImage name="./images/csv.png" style="width:30px;height:30px" />
+                                                                            <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" />
+                                                                        </h:commandLink>
+                                
+                                                                        <h:commandLink>
+                                                                            <p:graphicImage name="./images/xml.png" style="width:30px;height:30px" />
+                                                                            <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" />
+                                                                        </h:commandLink>
+                                                                    </h:form>
+                                                                </b:column>
+                                -->                                <b:column col-lg="4" >
                                     <div class="widget">
                                         <div class="widget-header"> <i class="fa fa-pie-chart"></i>
                                             <h3> Como Van Las Votaciones</h3>
                                         </div>
-                           
+
                                         <div class="widget-content">
                                             <ul class="messages_layout">
                                                 <h:form>
@@ -341,70 +342,70 @@
 
                                             </ul>
                                         </div>
-                                      
+
                                     </div>
                                 </b:column>
-<!--                                <b:column col-lg="8" >
-                                    <div class="widget">
-                                        <div class="widget-header"> <i class="fa fa-file"></i>
-                                            <h3> Noticias Importantes</h3>
-                                        </div>
-                                         /widget-header 
-                                        <div class="widget-content">
-                                            <ul class="messages_layout">
-                                                <h:form>
-                                                    <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
-
-                                                        <b:tab title="Reportes">
-                                                            <p:dataTable id="tbl" var="car" value="#{ciudadCT.ciudades}"
-                                                                         paginatorTemplate="{Exporters}"
-                                                                         paginator="true" style="margin-bottom:20px">
-
-                                                                <f:facet name="{Exporters}">
-                                                                    <b:commandButton value="descargar" >
-                                                                        <p:dataExporter repeat="false" type="xls" target="tbl" fileName="cars"/>
-                                                                    </b:commandButton>
-                                                                </f:facet>
-
-
-
-                                                            </p:dataTable>
-                                                            <br />
-                                                        </b:tab>
-
-                                                    </b:tabView>
-                                                </h:form>
-
-                                            </ul>
-                                        </div>
-                                         /widget-content  
-                                    </div>
-                                </b:column>-->
-
-                                <!-- /widget --> 
-
+                                <!--                                <b:column col-lg="8" >
+                                                                    <div class="widget">
+                                                                        <div class="widget-header"> <i class="fa fa-file"></i>
+                                                                            <h3> Noticias Importantes</h3>
+                                                                        </div>
+                                                                         /widget-header 
+                                                                        <div class="widget-content">
+                                                                            <ul class="messages_layout">
+                                                                                <h:form>
+                                                                                    <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
+                                
+                                                                                        <b:tab title="Reportes">
+                                                                                            <p:dataTable id="tbl" var="car" value="#{ciudadCT.ciudades}"
+                                                                                                         paginatorTemplate="{Exporters}"
+                                                                                                         paginator="true" style="margin-bottom:20px">
+                                
+                                                                                                <f:facet name="{Exporters}">
+                                                                                                    <b:commandButton value="descargar" >
+                                                                                                        <p:dataExporter repeat="false" type="xls" target="tbl" fileName="cars"/>
+                                                                                                    </b:commandButton>
+                                                                                                </f:facet>
+                                
+                                
+                                
+                                                                                            </p:dataTable>
+                                                                                            <br />
+                                                                                        </b:tab>
+                                
+                                                                                    </b:tabView>
+                                                                                </h:form>
+                                
+                                                                            </ul>
+                                                                        </div>
+                                                                         /widget-content  
+                                                                    </div>
+                                                                </b:column>-->
 
                                 <!-- /widget --> 
 
-                                <!-- /widget --> 
-<!--                                <b:column col-lg="4" >
-                                    <div class="widget">
-                                        <div class="widget-header"> <i class="fa fa-area-chart"></i>
-                                            <h3> El Mas Votado</h3>
-                                        </div>
-                                         /widget-header 
-                                        <div class="widget-content">
-                                            <ul class="messages_layout">
-                                                <h4> Nombre del Articulo</h4>
-                                                <h:form>
-                                                    <img  src=".././resources/images/JUGUETES.png" alt="Generic placeholder thumbnail" style="width:350px;height:295px"/>
-                                                </h:form>
 
-                                            </ul>
-                                        </div>
-                                         /widget-content  
-                                    </div>
-                                </b:column>-->
+                                <!-- /widget --> 
+
+                                <!-- /widget --> 
+                                <!--                                <b:column col-lg="4" >
+                                                                    <div class="widget">
+                                                                        <div class="widget-header"> <i class="fa fa-area-chart"></i>
+                                                                            <h3> El Mas Votado</h3>
+                                                                        </div>
+                                                                         /widget-header 
+                                                                        <div class="widget-content">
+                                                                            <ul class="messages_layout">
+                                                                                <h4> Nombre del Articulo</h4>
+                                                                                <h:form>
+                                                                                    <img  src=".././resources/images/JUGUETES.png" alt="Generic placeholder thumbnail" style="width:350px;height:295px"/>
+                                                                                </h:form>
+                                
+                                                                            </ul>
+                                                                        </div>
+                                                                         /widget-content  
+                                                                    </div>
+                                                                </b:column>-->
 
                                 <!-- /widget --> 
 

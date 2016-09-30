@@ -506,13 +506,13 @@ public class JugueteCT {
         ChartSeries inventario = new ChartSeries();
         inventario.setLabel("Articulos");
 
-        if (inventariosMasSeleccionados.size() >= 5) {
-            for (int i = 1; i <= 5; i++) {
-                inventario.set(inventariosMasSeleccionados.get(i).getNombre(), 1);
+        if (inventariosMasSeleccionados.size() >= 3) {
+            for (int i = 1; i <= 3; i++) {
+                inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 1);
             }
         } else if (inventariosMasSeleccionados.size() >= 1) {
             for (int i = 0; i < inventariosMasSeleccionados.size(); i++) {
-                inventario.set(inventariosMasSeleccionados.get(i).getNombre(), 1);
+                inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 1);
             }
         } else {
             inventario.set("", 0);
@@ -529,13 +529,13 @@ public class JugueteCT {
         ChartSeries inventario = new ChartSeries();
         inventario.setLabel("Articulos");
 
-        if (inventariosMasVotados.size() >= 5) {
-            for (int i = 1; i <= 5; i++) {
-                inventario.set(inventariosMasVotados.get(i).getNombre(), 1);
+        if (inventariosMasVotados.size() >= 3) {
+            for (int i = 1; i <= 3; i++) {
+                inventario.set(inventariosMasVotados.get(i).getCodigo(), 1);
             }
         } else if (inventariosMasVotados.size() >= 1) {
             for (int i = 0; i < inventariosMasVotados.size(); i++) {
-                inventario.set(inventariosMasVotados.get(i).getNombre(), 1);
+                inventario.set(inventariosMasVotados.get(i).getCodigo(), 1);
             }
         } else {
             inventario.set("", 0);
