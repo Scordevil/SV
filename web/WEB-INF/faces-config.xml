@@ -12,6 +12,11 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>Empresa</from-outcome>
+            <to-view-id>/Vistas/Empresa_Masiva.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>Comite</from-outcome>
             <to-view-id>/Vistas/Comite.xhtml</to-view-id>
             <redirect/>
