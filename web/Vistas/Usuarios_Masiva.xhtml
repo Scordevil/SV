@@ -79,7 +79,7 @@
                                         <div class="widget-content">
                                             <div class="widget big-stats-container">
                                                 <div class="widget-content">
-                                                    <h:form id="formularioRegistro">
+                                                    <h:form id="formularioRegistro" enctype="multipart/form-data">
                                                         <p:growl showDetail="true" autoUpdate="true" life="3000"/>
                                                         <div class="form-horizontal">                                                            
 
@@ -93,13 +93,13 @@
                                                                         <div class="widget-content">
                                                                             <div class="form-group">
                                                                                 <br/>
-                                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva: </label>                                               
-                                                                                <p:fileUpload id="imgLogo" value="#{usuarioCT.excel}" mode="simple" label="Seleccione archivo"   /> 
+                                                                                <p:growl id="messages" showDetail="true" />
+                                                                                <label for="inputUrlLogo" class="control-label">Carga Masiva Usuarios: </label>
+                                                                                <p:outputLabel value="#{usuarioCT.archivoExcel}"/>                                                              
+                                                                                <p:fileUpload id="imgLogo" value="#{usuarioCT.excel}" mode="simple" skinSimple="true" label="Seleccione archivo" /> 
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <b:commandButton action="#{usuarioCT.uploadExcel()}" ajax="false" class=" btn btn-info"  value="Aceptar">
-                                                                                    <b:iconAwesome name="Aceptar"/>
-                                                                                </b:commandButton>
+                                                                                <p:commandButton value="Submit" ajax="false" actionListener="#{usuarioCT.uploadExcel()}" disabled="false" />
                                                                             </div>
                                                                         </div>
                                                                         <!-- /widget-content --> 

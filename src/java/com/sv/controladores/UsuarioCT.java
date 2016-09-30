@@ -8,6 +8,7 @@ package com.sv.controladores;
 import com.sv.clases.LeerArchivoDeExcel;
 import com.sv.clases.Sesion;
 import com.sv.clases.Upload;
+import com.sv.clases.UtilPath;
 import com.sv.dao.CorreoDao;
 import com.sv.dao.UsuarioDao;
 import com.sv.modelos.Empresa;
@@ -41,6 +42,7 @@ public class UsuarioCT {
     private String buscar;
     private int idTipoUsuario;
     private UploadedFile excel;
+    private String archivoExcel;
     private boolean deshabilitar;
 
     private int operacion;
@@ -54,7 +56,6 @@ public class UsuarioCT {
         buscar = "";
         idTipoUsuario = 0;
         deshabilitar = false;
-
         nombreOperacion = "Registrar";
     }
 
@@ -151,6 +152,14 @@ public class UsuarioCT {
 
     public void setOperacion(int operacion) {
         this.operacion = operacion;
+    }
+
+    public String getArchivoExcel() {
+        return archivoExcel;
+    }
+
+    public void setArchivoExcel(String archivoExcel) {
+        this.archivoExcel = archivoExcel;
     }
 
     //Metodos
@@ -267,22 +276,22 @@ public class UsuarioCT {
         usuariosTipoEmpleado = usuarioDao.ConsultarUsuariosSegunEmpresa(empresa);
     }
 
-    public void uploadExcel(FileUploadEvent event) throws IOException, BiffException {
-        
-        UploadedFile file = event.getFile();   
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-    
-//        String path = Rute.getUrlDefinida(ec.getRealPath("/"));
-//        String realPath = path + File.separator + "web" + File.separator + "archivos" + File.separator + file.getFileName();
+    public void uploadExcel() throws IOException, BiffException {
+//        FileUploadEvent event:
+//        UploadedFile file = event.getFile();
+//            excel = event.getFile();
+
+        if (null != excel) {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+
+            String path = UtilPath.getUrlDefinida(ec.getRealPath("/"));
+            String realPath = path + File.separator + "web" + File.separator + "archivos" + File.separator + excel.getFileName();
 //        if(guardarArchivos(realPath, file)){
 //            extraerDatos(realPath);
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
 //        }
 
-        if (null != excel) {
-
-            LeerArchivoDeExcel le = new LeerArchivoDeExcel();
-            le.registrarUsuarioYPedido();
+            LeerArchivoDeExcel.registrarUsuarioYPedido(realPath);
         }
     }
 
@@ -296,12 +305,17 @@ public class UsuarioCT {
 //            le.registrarUsuarioYPedido();
 //        }
 //    }
-
     public void deshabilitarEmpresa() {
         if (usuario.getIdTipoUsuario().getIdTipoUsuario() == 1 || usuario.getIdTipoUsuario().getIdTipoUsuario() == 2) {
             deshabilitar = true;
         } else {
             deshabilitar = false;
         }
+    }
+    
+    public void prueba(String nombre){
+    String name = "";
+    name = nombre;
+        System.out.println("pruebas--------------***************"+name);
     }
 }

@@ -17,6 +17,7 @@ import java.io.IOException;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -35,9 +36,9 @@ public class LeerArchivoDeExcel {
 
     }
 
-    public static void registrarUsuarioYPedido() throws IOException, BiffException {
-
-        Workbook workbook = Workbook.getWorkbook(new File("C:\\Users\\Jose\\Downloads\\Colpatria - Base Beneficiarios el Faro.xls")); //Pasamos el excel que vamos a leer
+    public static void registrarUsuarioYPedido(String path) throws IOException, BiffException {
+        
+        Workbook workbook = Workbook.getWorkbook(new File(path)); //Pasamos el excel que vamos a leer
         Sheet sheet = workbook.getSheet(0); //Seleccionamos la hoja que vamos a leer
         String nombre = "", cedula = "", departamento = "", ciudad = "", oficina = "", area = "", telefono = "", email = "", hijo = "", sexo = "", nombreE = "", ciudadE = "", emailE = "", telefonoE = "", fechaE = "", horaE = "", direccionE = "";
         String contrasena = "", user = "";
