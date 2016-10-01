@@ -65,11 +65,24 @@
                         </ul>
                     </li>   
 
-                    <li >
-                        <h:link outcome="Comite">
-                            <i class="fa fa-users"></i><span>Comite </span> 
-                        </h:link>
-                    </li>
+                    <li class="dropdown" id="abrir-menu" >
+                        <a href=""  data-toggle="dropdown"> 
+                            <i class="fa fa-file-archive-o"></i><span>Comite</span> <b class="caret"></b>                                
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:link outcome="Comite">
+                                    <span>Crear Comite</span> 
+                                </h:link>
+                            </li>
+
+                            <li>
+                                <h:link outcome="Comites">
+                                    <span>Consultar Comite</span> 
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li> 
                 </ul>
             </ui:define>
 
@@ -128,8 +141,8 @@
                                                                                 <p:commandButton class="btn btn-info" value="Aceptar" ajax="false" actionListener="#{usuarioCT.uploadExcel()}" disabled="false" />
                                                                             </div>
                                                                             <p:growl id="growl" />
-<!--                                                                            <h3>Static Display</h3>
-                                                                            <p:progressBar value="60" labelTemplate="{value}%" displayOnly="true"/>-->
+                                                                            <!--                                                                            <h3>Static Display</h3>
+                                                                                                                                                        <p:progressBar value="60" labelTemplate="{value}%" displayOnly="true"/>-->
                                                                         </div>
                                                                         <!-- /widget-content --> 
                                                                     </div>
@@ -254,7 +267,7 @@
                 </div>
                 <!-- /main -->    
 
-             
+
             </ui:define>
 
         </ui:composition>
