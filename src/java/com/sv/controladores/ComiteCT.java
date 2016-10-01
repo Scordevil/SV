@@ -44,6 +44,8 @@ public class ComiteCT {
     @PostConstruct
     public void init() {
 
+        consultarComites();
+
     }
 
     public Comite getComite() {
@@ -125,6 +127,16 @@ public class ComiteCT {
         ComiteDao comiteDao = new ComiteDao();
         valor = comiteDao.consultarComitePorUsuario(idUsuario);//mayor a 0 pertenece al comite de votacion
 
+    }
+
+    public void consultarComites() {
+        ComiteDao comiteDao = new ComiteDao();
+
+        if (Sesion.obtenerSesion().getIdTipoUsuario().getIdTipoUsuario() == 1) {
+            comites = comiteDao.consultarComites();
+        } else {
+            comites = comiteDao.consultarComitesPorUsuario(Sesion.obtenerSesion().getIdUsuario());
+        }
     }
 
 }

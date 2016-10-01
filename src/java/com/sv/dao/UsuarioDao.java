@@ -19,7 +19,6 @@ import com.sv.webservices.clientes.ClienteConsultarUsuarioPorLogin;
 import com.sv.webservices.clientes.ClienteConsultarUsuarios;
 import com.sv.webservices.clientes.ClienteConsultarUsuariosEmpresa;
 import com.sv.webservices.clientes.ClienteConsultarUsuariosSegunTipo;
-import com.sv.webservices.clientes.ClienteEditarEmpresa;
 import com.sv.webservices.clientes.ClienteEditarUsuario;
 import com.sv.webservices.clientes.ClienteEliminarUsuario;
 import com.sv.webservices.clientes.ClienteQuitarAcceso;

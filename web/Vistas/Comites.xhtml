@@ -67,7 +67,7 @@
 
                     <li class="dropdown active" id="abrir-menu" >
                         <a href=""  data-toggle="dropdown"> 
-                            <i class="fa fa-file-archive-o"></i><span>Comite</span> <b class="caret"></b>                                
+                            <i class="fa fa-group"></i><span>Comite</span> <b class="caret"></b>                                
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -94,7 +94,7 @@
                         <b:container fluid="true">
                             <center>
                                 <div style="margin-bottom: 30px">
-                                    <h2> Comites -<small>consultar de Comite.</small> </h2>
+                                    <h2> Comites -<small> Consultar de Comite.</small> </h2>
                                 </div>
 
                             </center>
@@ -110,39 +110,35 @@
                                                 <div class="widget big-stats-container">
                                                     <div class="widget-content">
                                                         <h:form id="formularioLista">
-                                                            <div class="form-group">
-                                                                <label for="inputEmpresa" class="col-sm-4 control-label">Nombre Empresa: </label>
-                                                                <h:selectOneMenu id="inputEmpresa" class="form-control "  style="width: 66.6666666% !important;"  value="#{jugueteCT.empresa.idEmpresa}" >
-                                                                    <p:ajax event="change" listener="#{jugueteCT.consultarJuguetesPorEmpresa()}" update="DTEmpleados"/>
+<!--                                                            <div class="form-group">
+                                                                <label for="inputComite" class="col-sm-4 control-label">Nombre Empresa: </label>
+                                                                <h:selectOneMenu id="inputComite" class="form-control "  style="width: 66.6666666% !important;"  value="" >
+                                                                    <p:ajax event="change" listener="" update="DTComite"/>
                                                                     <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
                                                                     <f:selectItem itemLabel="Todos" itemValue="0"/>
-                                                                    <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
+                                                                    <f:selectItems value="" var="emp" itemLabel="" itemValue=""/>
                                                                 </h:selectOneMenu>
-                                                                <p:message for="inputEmpresa" ></p:message>
-                                                            </div>  
-                                                            <p:dataTable id="DTEmpleados" value="#{jugueteCT.inventarios}" var="inventario" rows="10"
+                                                                <p:message for="inputComite" ></p:message>
+                                                            </div>  -->
+                                                            <p:dataTable id="DTComite" value="#{comiteCT.comites}" var="com" rows="10"
                                                                          paginator="true"
                                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                                          rowsPerPageTemplate="5,10,15" emptyMessage="Juguetes no registrados">
                                                                 <p:column headerText="Codigo">
-                                                                    <h:outputLabel value="#{inventario.codigo}"/>
+                                                                    <h:outputLabel value="#{com.idComite}"/>
                                                                 </p:column>
                                                                 <p:column headerText="Nombre">
-                                                                    <h:outputLabel value="#{inventario.nombre}"/>
+                                                                    <h:outputLabel value="#{com.nombre}"/>
                                                                 </p:column>
-                                                                <p:column headerText="Edad Min">
-                                                                    <h:outputLabel value="#{inventario.edadDesde}"/>
+                                                                <p:column headerText="Descripcion">
+                                                                    <h:outputLabel value="#{com.descripcion}"/>
                                                                 </p:column>
-                                                                <p:column headerText="Edad Max">
-                                                                    <h:outputLabel value="#{inventario.edadHasta}"/>
+                                                                <p:column headerText="Fecha Apertura">
+                                                                    <h:outputLabel value="#{com.fechaApertura}"/>
                                                                 </p:column>
-                                                                <p:column headerText="Genero">
-                                                                    <h:outputLabel value="#{inventario.genero}"/>
+                                                                <p:column headerText="Fecha Cierre">
+                                                                    <h:outputLabel value="#{com.fechaCierre}"/>
                                                                 </p:column>  
-                                                                <p:column headerText="Cantidad">
-                                                                    <h:outputLabel value="#{inventario.cantidad}"/>
-                                                                </p:column> 
-
                                                             </p:dataTable>
                                                         </h:form>
                                                     </div>

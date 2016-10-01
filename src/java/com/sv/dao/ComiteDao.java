@@ -5,14 +5,27 @@
  */
 package com.sv.dao;
 
+import com.sv.modelos.Ciudad;
 import com.sv.modelos.Comite;
+import com.sv.modelos.Departamento;
+import com.sv.modelos.Empresa;
+import com.sv.modelos.Estado;
+import com.sv.modelos.Tipousuario;
+import com.sv.modelos.Usuario;
 import com.sv.webservices.clientes.ClienteConsultarComite;
 import com.sv.webservices.clientes.ClienteConsultarComitePorUsuario;
+import com.sv.webservices.clientes.ClienteConsultarComites;
+import com.sv.webservices.clientes.ClienteConsultarComitesPorUsuario;
+import com.sv.webservices.clientes.ClienteConsultarUsuarios;
 import com.sv.webservices.clientes.ClienteEliminarComite;
 import com.sv.webservices.clientes.ClienteModificarComite;
 import com.sv.webservices.clientes.ClienteRegistrarComite;
 import com.sv.webservices.clientes.ClienteValidarVotacionPorUsuario;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -66,6 +79,49 @@ public class ComiteDao {
     public int validarVotacionPorUsuario(int idUsuario) {
         ClienteValidarVotacionPorUsuario cliente = new ClienteValidarVotacionPorUsuario();
         return cliente.validarVotacionPorUsuario(int.class, "" + idUsuario);
+    }
+
+    public List<Comite> consultarComites() {
+        ClienteConsultarComites cliente = new ClienteConsultarComites();
+        List<HashMap> datos = cliente.consultarComite(List.class);
+        List<Comite> comites = new ArrayList<>();
+
+        EmpresaDao ed = new EmpresaDao();
+
+        for (int i = 0; i < datos.size(); i++) {
+            HashMap map1 = (HashMap) datos.get(i).get("idEmpresa");
+            comites.add(new Comite((int) datos.get(i).get("idComite"),
+                    (String) datos.get(i).get("nombre"),
+                    (String) datos.get(i).get("descripcion"),
+                    (Date) datos.get(i).get("fechaApertura"),
+                    (Date) datos.get(i).get("fechaCierre"),
+                    ed.consultarEmpresa(new Empresa((int) map1.get("idEmpresa")))));
+
+        }
+
+        return comites;
+    }
+
+    public List<Comite> consultarComitesPorUsuario(int idUsuario) {
+        ClienteConsultarComitesPorUsuario cliente = new ClienteConsultarComitesPorUsuario();
+        List<HashMap> datos = cliente.consultarComitesPorUsuario(List.class, idUsuario+"");
+        List<Comite> comites = new ArrayList<>();
+
+        EmpresaDao ed = new EmpresaDao();
+
+        for (int i = 0; i < datos.size(); i++) {
+            HashMap map1 = (HashMap) datos.get(i).get("idEmpresa");
+            comites.add(new Comite((int) datos.get(i).get("idComite"),
+                    (String) datos.get(i).get("nombre"),
+                    (String) datos.get(i).get("descripcion"),
+                    (Date) datos.get(i).get("fechaApertura"),
+                    (Date) datos.get(i).get("fechaCierre"),
+                    ed.consultarEmpresa(new Empresa((int) map1.get("idEmpresa"))),
+                    new Estado((int) datos.get(i).get("idEstado"))));
+
+        }
+
+        return comites;
     }
 
 }

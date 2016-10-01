@@ -100,6 +100,15 @@ public class Comite implements Serializable {
     }
     
     
+        public Comite(Integer idComite, String nombre, String descripcion, Date fechaApertura, Date fechaCierre, Empresa idEmpresa) {
+        this.idComite = idComite;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaApertura = fechaApertura;
+        this.fechaCierre = fechaCierre;
+        this.idEmpresa = idEmpresa;
+    }
+    
 
     public Integer getIdComite() {
         return idComite;
