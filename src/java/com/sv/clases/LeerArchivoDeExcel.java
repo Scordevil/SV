@@ -33,11 +33,10 @@ public class LeerArchivoDeExcel {
     public static void main(String[] args) throws IOException, BiffException {
 
 //        registrarMasivaInventario();
-
     }
 
     public static void registrarUsuarioYPedido(String path, int idEmpresa) throws IOException, BiffException {
-        
+
         Workbook workbook = Workbook.getWorkbook(new File(path)); //Pasamos el excel que vamos a leer
         Sheet sheet = workbook.getSheet(0); //Seleccionamos la hoja que vamos a leer
         String nombre = "", cedula = "", departamento = "", ciudad = "", oficina = "", area = "", telefono = "", email = "", hijo = "", sexo = "", nombreE = "", ciudadE = "", emailE = "", telefonoE = "", fechaE = "", horaE = "", direccionE = "";
@@ -67,7 +66,11 @@ public class LeerArchivoDeExcel {
             telefono = sheet.getCell(7, fila).getContents();
             email = sheet.getCell(8, fila).getContents();
             hijo = sheet.getCell(9, fila).getContents();
-            edad = Integer.parseInt(sheet.getCell(10, fila).getContents());
+            if (sheet.getCell(10, fila).getContents().trim().equals("") || sheet.getCell(10, fila).getContents().trim().equals("0")) {
+                edad = 0;
+            } else {
+                edad = Integer.parseInt(sheet.getCell(10, fila).getContents());
+            }
             sexo = sheet.getCell(11, fila).getContents();
             nombreE = sheet.getCell(12, fila).getContents();
             ciudadE = sheet.getCell(13, fila).getContents();
