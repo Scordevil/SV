@@ -31,10 +31,10 @@ public class LeerArchivoDeExcel {
     static Inventario inventario = new Inventario();
 
     public static void main(String[] args) throws IOException, BiffException {
-
-        String a = "C:\\Users\\Gustavo\\Downloads\\Colpatria - Base Beneficiarios el Faro1.xls";
-
-        registrarUsuarioYPedido(a, 7);
+//
+//        String a = "C:\\Users\\Gustavo\\Downloads\\Colpatria - Base Beneficiarios el Faro1.xls";
+//
+//        registrarUsuarioYPedido(a, 7);
     }
 
     public static void registrarUsuarioYPedido(String path, int idEmpresa) throws IOException, BiffException {
@@ -106,6 +106,8 @@ public class LeerArchivoDeExcel {
             UsuarioDao usuarioDAO = new UsuarioDao();
             PedidoDao pedidoDAO = new PedidoDao();
 
+            temp = null;
+            temp = new Usuario();
             temp = usuarioDAO.consultarUsuarioPorCC(usuario.getCc());
             if (temp.getIdUsuario() > 0) {
                 pedidoDAO.registrarPedido(temp, pedido);
