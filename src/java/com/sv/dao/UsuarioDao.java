@@ -14,6 +14,7 @@ import com.sv.modelos.Usuario;
 import com.sv.webservices.clientes.ClienteBuscarUsuariosPorTipo;
 import com.sv.webservices.clientes.ClienteConsultarTipoUsuarios;
 import com.sv.webservices.clientes.ClienteConsultarTipoUsuariosRestringidos;
+import com.sv.webservices.clientes.ClienteConsultarUsuarioEmpresaLikeInicio;
 import com.sv.webservices.clientes.ClienteConsultarUsuarioPorCC;
 import com.sv.webservices.clientes.ClienteConsultarUsuarioPorLogin;
 import com.sv.webservices.clientes.ClienteConsultarUsuarios;
@@ -263,6 +264,41 @@ public class UsuarioDao {
     public List<Usuario> ConsultarUsuariosSegunEmpresa(Empresa empresa) {
         ClienteConsultarUsuariosEmpresa cliente = new ClienteConsultarUsuariosEmpresa();
         List<HashMap> datos = cliente.consultarUsuariosPorEmpresa(List.class, "" + empresa.getIdEmpresa());
+        List<Usuario> usuarios = new ArrayList<>();
+
+        CiudadDao cd = new CiudadDao();
+        DepartamentoDao dd = new DepartamentoDao();
+        TipoUsuarioDao td = new TipoUsuarioDao();
+        EmpresaDao ed = new EmpresaDao();
+        UsuarioDao ud = new UsuarioDao();
+
+        for (int i = 0; i < datos.size(); i++) {
+            HashMap map1 = (HashMap) datos.get(i).get("idEmpresa");
+            HashMap map2 = (HashMap) datos.get(i).get("idCiudad");
+            HashMap map3 = (HashMap) datos.get(i).get("idDepartamento");
+            HashMap map4 = (HashMap) datos.get(i).get("idTipoUsuario");
+            usuarios.add(new Usuario((int) datos.get(i).get("idUsuario"),
+                    (String) datos.get(i).get("nombre"),
+                    (int) datos.get(i).get("codigoEmpleado"),
+                    (String) datos.get(i).get("cc"),
+                    (String) datos.get(i).get("telefono"),
+                    (String) datos.get(i).get("email"),
+                    (String) datos.get(i).get("usuario"),
+                    (String) datos.get(i).get("contrasena"),
+                    (String) datos.get(i).get("oficina"),
+                    (String) datos.get(i).get("areaTrabajo"),
+                    td.consultarTipoUsuario(new Tipousuario((int) map4.get(("idTipoUsuario")))),
+                    ed.consultarEmpresa(new Empresa((int) map1.get("idEmpresa"))),
+                    dd.consultarDepartamento(new Departamento((int) map3.get("idDepartamento"))),
+                    cd.consultarCiudad(new Ciudad((int) map2.get("idCiudad")))));
+        }
+
+        return usuarios;
+    }
+
+    public List<Usuario> ConsultarUsuariosSegunEmpresaLikeInicio(Empresa empresa, String nombre) {
+        ClienteConsultarUsuarioEmpresaLikeInicio cliente = new ClienteConsultarUsuarioEmpresaLikeInicio();
+        List<HashMap> datos = cliente.consultarUsuariosEmpresaLike(List.class, "" + empresa.getIdEmpresa(), nombre);
         List<Usuario> usuarios = new ArrayList<>();
 
         CiudadDao cd = new CiudadDao();

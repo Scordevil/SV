@@ -34,7 +34,7 @@ import org.primefaces.model.UploadedFile;
  *
  * @author VaioDevelopment
  */
-public class UsuarioCT implements Serializable{
+public class UsuarioCT implements Serializable {
 
     private Integer progress;
     private Usuario usuario;
@@ -273,6 +273,18 @@ public class UsuarioCT implements Serializable{
         }
     }
 
+    public void consultarUsuarioPorEmpresasLikeInicio() {
+        UsuarioDao usuarioDao = new UsuarioDao();
+        Empresa empresa = new Empresa(usuario.getIdEmpresa().getIdEmpresa());
+
+//        if (usuario.getIdEmpresa().getIdEmpresa() == 999999999) {
+//            usuarios = usuarioDao.consultarUsuarios();
+//        } else {
+        if (usuario.getNombre().length() >= 2) {
+            usuarios = usuarioDao.ConsultarUsuariosSegunEmpresaLikeInicio(empresa, usuario.getNombre());
+        }
+    }
+
     public void cargarEmpleadosSegunEmpresa(Empresa empresa) {
         UsuarioDao usuarioDao = new UsuarioDao();
         usuariosTipoEmpleado = usuarioDao.ConsultarUsuariosSegunEmpresa(empresa);
@@ -349,6 +361,5 @@ public class UsuarioCT implements Serializable{
     public void onComplete() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Progress Completed"));
     }
-    
-    
+
 }

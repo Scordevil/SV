@@ -231,19 +231,30 @@
                                                                 <div class="form-group">
                                                                     <label for="inputEmpresa" class="col-sm-4 control-label">Nombre Empresa: </label>
                                                                     <h:selectOneMenu id="inputEmpresa" class="form-control "  style="width: 66.6666666% !important;"  value="#{usuarioCT.usuario.idEmpresa.idEmpresa}" >
-                                                                        <p:ajax event="change" listener="#{usuarioCT.consultarUsuariosPorEmpresas()}" update="user"/>
+                                                                        <!--<p:ajax event="change" listener="{usuarioCT.consultarUsuarioPorEmpresasLikeInicio()}" update="user"/>-->
                                                                         <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
-                                                                        <c:if test="${usuarioCT.idTipoUsuario == 1}">
+                                                                        <!--                                                                        <c:if test="{usuarioCT.idTipoUsuario == 1}">
                                                                             <f:selectItem itemLabel="Todos" itemValue="999999999"/>
-                                                                        </c:if>
+                                                                                                                                                </c:if>-->
                                                                         <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
-
-
                                                                     </h:selectOneMenu>
                                                                     <p:message for="inputEmpresa" ></p:message>
-                                                                </div>    
+                                                                </div>   
+                                                                <div class="form-group">
+                                                                    <label for="inputOficina" class=" col-sm-4  control-label"><strong> Iniciales del Nombre: </strong> minimo dos letras</label>
+                                                                    <p:inputText class="form-control"  style="width: 66.6666666% !important;" placeholder="Ejemplo: Ad - Adriana " value="#{usuarioCT.usuario.nombre}"/>                                                            
+                                                                </div> 
+                                                                <div align="right">
+                                                                    <h:panelGrid columns="2">
+                                                                        <p:commandButton action="#{usuarioCT.consultarUsuarioPorEmpresasLikeInicio()}"
+                                                                                         update=" :formularioLista" class=" btn btn-info" value="Buscar" />
+                                                                    </h:panelGrid>
+                                                                </div>
                                                             </c:if>
-                                                            <p:dataTable   class="table-responsive" style="width: 100%"  value="#{usuarioCT.usuarios}" var="usuario" id="user">
+                                                            <p:dataTable   class="table-responsive" style="width: 100%"  value="#{usuarioCT.usuarios}" var="usuario" id="user" rows="100"
+                                                                           paginator="true"
+                                                                           paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                           rowsPerPageTemplate="30,50,100" emptyMessage="Usuarios no registrados">
                                                                 <p:column headerText="Nombre">
                                                                     <h:outputLabel value="#{usuario.nombre}"/>
                                                                 </p:column>
