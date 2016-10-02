@@ -32,7 +32,9 @@ public class LeerArchivoDeExcel {
 
     public static void main(String[] args) throws IOException, BiffException {
 
-//        registrarMasivaInventario();
+        String a = "C:\\Users\\Gustavo\\Downloads\\Colpatria - Base Beneficiarios el Faro1.xls";
+
+        registrarUsuarioYPedido(a, 7);
     }
 
     public static void registrarUsuarioYPedido(String path, int idEmpresa) throws IOException, BiffException {
@@ -105,7 +107,7 @@ public class LeerArchivoDeExcel {
             PedidoDao pedidoDAO = new PedidoDao();
 
             temp = usuarioDAO.consultarUsuarioPorCC(usuario.getCc());
-            if (temp.getIdUsuario() != 0) {
+            if (temp.getIdUsuario() > 0) {
                 pedidoDAO.registrarPedido(temp, pedido);
             } else {
                 usuarioDAO.registrarUsuario(usuario);
@@ -127,8 +129,16 @@ public class LeerArchivoDeExcel {
             sku = sheet.getCell(0, fila).getContents(); //setear la celda leida a nombre
             nombre = sheet.getCell(1, fila).getContents();
             descripcion = sheet.getCell(2, fila).getContents();
-            rangoD = Integer.parseInt(sheet.getCell(3, fila).getContents());
-            rangoH = Integer.parseInt(sheet.getCell(4, fila).getContents());
+            if (sheet.getCell(10, fila).getContents().trim().equals("") || sheet.getCell(10, fila).getContents().trim().equals("0")) {
+                rangoD = 0;
+            } else {
+                rangoD = Integer.parseInt(sheet.getCell(3, fila).getContents());
+            }
+            if (sheet.getCell(10, fila).getContents().trim().equals("") || sheet.getCell(10, fila).getContents().trim().equals("0")) {
+                rangoH = 0;
+            } else {
+                rangoH = Integer.parseInt(sheet.getCell(4, fila).getContents());
+            }
             genero = sheet.getCell(5, fila).getContents();
             url1 = sheet.getCell(6, fila).getContents();
             url2 = sheet.getCell(7, fila).getContents();
