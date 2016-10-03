@@ -82,27 +82,38 @@ public class PedidoDao {
         List<HashMap> datos = Inventario.consultarJuguetesEdadGeneroCiudadEmpresa(List.class, idEmpresa + "", edad + "", genero, idCiudad + "");
         List<Inventario> Inventarios = new ArrayList<>();
 
+        CiudadDao cd = new CiudadDao();
+        UsuarioDao ud = new UsuarioDao();
+        EmpresaDao ed = new EmpresaDao();
+
+        System.err.println("-------------------------- PRUEBA" + datos);
+
         for (int i = 0; i < datos.size(); i++) {
             LinkedHashMap usuario = (LinkedHashMap) datos.get(i).get("idUsuario");
+            HashMap map2 = (HashMap) datos.get(i).get("idCiudad");
+            HashMap map3 = (HashMap) datos.get(i).get("idUsuario");
 
-//            Inventarios.add(new Inventario((int) datos.get(i).get("idInventario"),
-//                    (String) datos.get(i).get("nombre"),
-//                    (String) datos.get(i).get("genero"),
-//                    new Empresa(new Usuario(new Ciudad((int) datos.get(i).get("idCiudad"),
-//                            (String) datos.get(i).get("nombre")),
-//                            (String) datos.get(i).get("cc"),
-//                            (String) datos.get(i).get("nombre")),
-//                            new Pedido((String) datos.get(i).get("nombreHijo"),
-//                                    (int) datos.get(i).get("edadHijo")))));
             Inventarios.add(new Inventario((int) datos.get(i).get("idInventario"),
                     (String) datos.get(i).get("nombre"),
                     (String) datos.get(i).get("genero"),
-                    new Empresa(new Usuario(new Ciudad((int) datos.get(i).get("idCiudad"),
-                            (String) datos.get(i).get("nombre")), (String) datos.get(i).get("cc"),
+                    new Empresa(new Usuario(cd.consultarCiudad(new Ciudad((int) map2.get("idCiudad"),
+                            (String) map2.get("nombre"))),
+                            (String) datos.get(i).get("cc"),
                             (String) datos.get(i).get("nombre"))),
                     new Pedido((String) datos.get(i).get("nombreHijo"),
                             (int) datos.get(i).get("edadHijo"))
             ));
+//
+//            Inventarios.add(new Inventario((int) datos.get(i).get("idInventario"),
+//                    (String) datos.get(i).get("nombre"),
+//                    (String) datos.get(i).get("genero"),
+//                    new Empresa(new Usuario(cd.consultarCiudad(new Ciudad((int) map2.get("idCiudad"),
+//                            (String) map2.get("nombre"))),
+//                            (String) datos.get(i).get("cc"),
+//                            (String) datos.get(i).get("nombre"))),
+//                    new Pedido((String) datos.get(i).get("nombreHijo"),
+//                            (int) datos.get(i).get("edadHijo"))
+//            ));
 
         }
         return Inventarios;

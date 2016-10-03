@@ -16,6 +16,7 @@ import com.sv.clases.UtilPath;
 import com.sv.dao.ComiteDao;
 import com.sv.dao.InventarioDao;
 import com.sv.dao.PedidoDao;
+import com.sv.modelos.Ciudad;
 import com.sv.modelos.Empresa;
 import com.sv.modelos.Inventario;
 import com.sv.modelos.Pedido;
@@ -63,6 +64,7 @@ public class JugueteCT {
     private String buscar;
     private Empresa empresa;
     private UploadedFile excel;
+    private Ciudad ciudad;
 
     private LineChartModel animatedModel1;
     private BarChartModel animatedModel2;
@@ -87,7 +89,8 @@ public class JugueteCT {
         empresa = new Empresa();
         calificacion = 0;
         usuario = new Usuario();
-
+        pedido = new Pedido();
+        ciudad = new Ciudad();
     }
 
     @PostConstruct
@@ -251,6 +254,14 @@ public class JugueteCT {
 
     public void setInventariosSeleccionados(List<Inventario> inventariosSeleccionados) {
         this.inventariosSeleccionados = inventariosSeleccionados;
+    }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
 
     //Metodos
@@ -538,13 +549,13 @@ public class JugueteCT {
         ChartSeries inventario = new ChartSeries();
         inventario.setLabel("Articulos");
 
-        if (inventariosMasSeleccionados.size() >= 3) {
-            for (int i = 1; i <= 3; i++) {
-                inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 1);
+        if (inventariosMasSeleccionados.size() >= 2) {
+            for (int i = 0; i <= 2; i++) {
+                inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 0);
             }
         } else if (inventariosMasSeleccionados.size() >= 1) {
             for (int i = 0; i < inventariosMasSeleccionados.size(); i++) {
-                inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 1);
+                inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 0);
             }
         } else {
             inventario.set("", 0);
@@ -633,7 +644,7 @@ public class JugueteCT {
         inventariosSeleccionados = new ArrayList<>();
         PedidoDao pedidoDao = new PedidoDao();
         inventariosSeleccionados = pedidoDao.ConsultarJuguetesEdadGeneroCiudadEmpresa(usuario.getIdEmpresa().getIdEmpresa(),
-                pedido.getEdadHijo(), juguete.getGenero(), usuario.getIdCiudad().getIdCiudad());
+                pedido.getEdadHijo(), juguete.getGenero().trim(), ciudad.getIdCiudad());
     }
 
 }
