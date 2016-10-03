@@ -27,6 +27,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import jxl.read.biff.BiffException;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -290,12 +291,16 @@ public class UsuarioCT implements Serializable {
         usuariosTipoEmpleado = usuarioDao.ConsultarUsuariosSegunEmpresa(empresa);
     }
 
-    public void uploadExcel() throws IOException, BiffException {
+    public String uploadExcel() throws IOException, BiffException {
+
+        String link = "";
 //        FileUploadEvent event:
 //        UploadedFile file = event.getFile();
 //            excel = event.getFile();
 
         if (null != excel) {
+
+//            showMessage();
             ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 
             String path = UtilPath.getUrlDefinida(ec.getRealPath("/"));
@@ -312,8 +317,23 @@ public class UsuarioCT implements Serializable {
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", path));
 //        }
 
+//            String a = "C:\\Users\\Gustavo\\Downloads\\Colpatria - Base Beneficiarios el Faro1.xls";
+//            LeerArchivoDeExcel.registrarUsuarioYPedido(a, usuario.getIdEmpresa().getIdEmpresa());
             LeerArchivoDeExcel.registrarUsuarioYPedido(realPath, usuario.getIdEmpresa().getIdEmpresa());
+
+            link = "Dashboard";
+
         }
+
+        return link;
+
+    }
+
+    public void showMessage() throws IOException, BiffException {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor espera!!", "Esta Operación puede durar de 1 a 5 minutos.");
+
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
+
     }
 
 //    public void uploadExcel() throws IOException, BiffException {

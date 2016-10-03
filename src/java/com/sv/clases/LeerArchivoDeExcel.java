@@ -5,6 +5,7 @@
  */
 package com.sv.clases;
 
+import com.sv.controladores.UsuarioCT;
 import com.sv.dao.InventarioDao;
 import com.sv.dao.PedidoDao;
 import com.sv.dao.UsuarioDao;
@@ -17,7 +18,6 @@ import java.io.IOException;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -29,6 +29,7 @@ public class LeerArchivoDeExcel {
     static Usuario temp = new Usuario();
     static Pedido pedido = new Pedido();
     static Inventario inventario = new Inventario();
+    static UsuarioCT us = new UsuarioCT();
 
     public static void main(String[] args) throws IOException, BiffException {
 //
@@ -54,7 +55,13 @@ public class LeerArchivoDeExcel {
 //        }
 //        for (int fila = 1; fila < sheet.getRows(); fila++) { //recorremos las filas
 
+        
+//        System.out.println("***************************"+us.getProgress());
+
+        
+
         for (int fila = 1; fila < sheet.getRows(); fila++) { //recorremos las filas
+            
 
             nombre = sheet.getCell(0, fila).getContents(); //setear la celda leida a nombre
             if (!(sheet.getCell(1, fila).getContents().equals(""))) {
