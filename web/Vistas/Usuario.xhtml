@@ -251,10 +251,10 @@
                                                                     </h:panelGrid>
                                                                 </div>
                                                             </c:if>
-                                                            <p:dataTable   class="table-responsive" style="width: 100%"  value="#{usuarioCT.usuarios}" var="usuario" id="user" rows="100"
+                                                            <p:dataTable   class="table-responsive" style="width: 100%"  value="#{usuarioCT.usuarios}" var="usuario" id="user" rows="20"
                                                                            paginator="true"
                                                                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                           rowsPerPageTemplate="30,50,100" emptyMessage="Usuarios no registrados">
+                                                                           rowsPerPageTemplate="20,30,50,100" emptyMessage="Usuarios no registrados">
                                                                 <p:column headerText="Nombre">
                                                                     <h:outputLabel value="#{usuario.nombre}"/>
                                                                 </p:column>
