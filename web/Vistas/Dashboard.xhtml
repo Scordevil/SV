@@ -91,26 +91,7 @@
                     <div class="main-inner">
                         <b:container fluid="false" >
                             <b:row>
-                                <b:column style="width: 100%">
-                                    <h:form>
-                                        <c:if test="${usuarioCT.idTipoUsuario == 1 || usuarioCT.idTipoUsuario == 2}">
-                                            <div class="form-group">
-                                                <label for="inputEmpresa" class="col-sm-4 control-label">Nombre Empresa: </label>
-                                                <h:selectOneMenu id="inputEmpresa" class="form-control "  style="width: 66.6666666% !important;"  value="#{usuarioCT.usuario.idEmpresa.idEmpresa}" >
-                                                    <!--<p:ajax event="change" listener="#{usuarioCT.consultarUsuariosPorEmpresas()}" update="user"/>-->
-                                                    <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
-                                                    <c:if test="${usuarioCT.idTipoUsuario == 1}">
-                                                        <f:selectItem itemLabel="Todos" itemValue="999999999"/>
-                                                    </c:if>
-                                                    <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
 
-
-                                                </h:selectOneMenu>
-                                                <p:message for="inputEmpresa" ></p:message>
-                                            </div>    
-                                        </c:if>
-                                    </h:form>
-                                </b:column>
 
                                 <b:column col-lg="8" >
 
