@@ -97,7 +97,9 @@ public class Empresa implements Serializable {
         this.idUsuario = idUsuario;
     }
     
-    
+      public Empresa(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public Empresa(Integer idEmpresa, int comite) {
         this.idEmpresa = idEmpresa;

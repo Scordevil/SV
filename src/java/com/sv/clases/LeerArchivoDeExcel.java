@@ -109,7 +109,7 @@ public class LeerArchivoDeExcel {
             pedido.setEdadHijo(edad);
             pedido.setIdInventario(0);
 
-//= new Usuario(nombre, codigo, cedula, telefono, email, user, contrasena, oficina, area,new Tipousuario(4), new Empresa(3), new Departamento(2, departamento), new Ciudad(1, ciudad));
+
             UsuarioDao usuarioDAO = new UsuarioDao();
             PedidoDao pedidoDAO = new PedidoDao();
 

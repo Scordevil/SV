@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -113,6 +114,9 @@ public class Inventario implements Serializable {
     @JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa")
     @ManyToOne(optional = false)
     private Empresa idEmpresa;
+    @JoinColumn(name = "pedido", referencedColumnName = "pedido")
+    @ManyToOne(optional = false)
+    private Pedido pedido;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInventario")
     private Collection<Votacion> votacionCollection;
 
@@ -170,6 +174,14 @@ public class Inventario implements Serializable {
         this.observacion = observacion;
         this.sumatoria = sumatoria;
         this.idEmpresa = idEmpresa;
+    }
+
+    public Inventario(Integer idInventario, String nombre, String genero, Empresa idEmpresa, Pedido pedido) {
+        this.idInventario = idInventario;
+        this.nombre = nombre;
+        this.genero = genero;
+        this.idEmpresa = idEmpresa;
+        this.pedido = pedido;
     }
 
     public Inventario(Integer idInventario) {
@@ -351,8 +363,14 @@ public class Inventario implements Serializable {
     public void setSumatoria(int sumatoria) {
         this.sumatoria = sumatoria;
     }
-    
-    
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
 
     @XmlTransient
     @JsonIgnore

@@ -135,7 +135,13 @@ public class Usuario implements Serializable {
     public Usuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
-
+    
+       public Usuario(Ciudad idCiudad, String nombre, String cc) {
+        this.idCiudad = idCiudad;
+        this.nombre = nombre;
+        this.cc = cc;
+    }
+    
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -215,6 +221,8 @@ public class Usuario implements Serializable {
     public void setAreaTrabajo(String areaTrabajo) {
         this.areaTrabajo = areaTrabajo;
     }
+    
+   
 
     @XmlTransient
     @JsonIgnore

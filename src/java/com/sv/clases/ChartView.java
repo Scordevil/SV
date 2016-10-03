@@ -121,8 +121,8 @@ public class ChartView implements Serializable {
     private void createPieModel1() {
         pieModel1 = new PieChartModel();
          
-        pieModel1.set("Votaron", 540);
-        pieModel1.set("Faltan por Votar", 325);
+        pieModel1.set("Votaron", 0);
+        pieModel1.set("Faltan por Votar", 0);
         
          
         pieModel1.setTitle("Votaciones");

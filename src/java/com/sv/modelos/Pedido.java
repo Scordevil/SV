@@ -83,6 +83,11 @@ public class Pedido implements Serializable {
         this.idUsuario = new Usuario();
         this.idPedido = 0;
     }
+    
+     public Pedido(String nombreHijo, Integer edadHijo) {
+        this.nombreHijo = nombreHijo;
+        this.edadHijo = edadHijo;
+    }
 
     public Pedido(Integer idPedido, String nombreHijo, Integer edadHijo, String sexoHijo, String nombreEncargado, String ciudadEncargado, String emailEncargado, String telefonoEncargado, Date fechaEntrega, Date horaEntrega, String direccionEntrega, Usuario idUsuario) {
         this.idPedido = idPedido;

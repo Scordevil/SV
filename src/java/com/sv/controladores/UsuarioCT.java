@@ -291,9 +291,9 @@ public class UsuarioCT implements Serializable {
         usuariosTipoEmpleado = usuarioDao.ConsultarUsuariosSegunEmpresa(empresa);
     }
 
-    public String uploadExcel() throws IOException, BiffException {
+    public void uploadExcel() throws IOException, BiffException {
 
-        String link = "";
+//        String link = "";
 //        FileUploadEvent event:
 //        UploadedFile file = event.getFile();
 //            excel = event.getFile();
@@ -321,20 +321,20 @@ public class UsuarioCT implements Serializable {
 //            LeerArchivoDeExcel.registrarUsuarioYPedido(a, usuario.getIdEmpresa().getIdEmpresa());
             LeerArchivoDeExcel.registrarUsuarioYPedido(realPath, usuario.getIdEmpresa().getIdEmpresa());
 
-            link = "Dashboard";
+//            link = "Dashboard";
 
         }
 
-        return link;
+//        return link;
 
     }
 
-    public void showMessage() throws IOException, BiffException {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor espera!!", "Esta Operación puede durar de 1 a 5 minutos.");
-
-        RequestContext.getCurrentInstance().showMessageInDialog(message);
-
-    }
+//    public void showMessage() throws IOException, BiffException {
+//        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor espera!!", "Esta Operación puede durar de 1 a 5 minutos.");
+//
+//        RequestContext.getCurrentInstance().showMessageInDialog(message);
+//
+//    }
 
 //    public void uploadExcel() throws IOException, BiffException {
 ////        String destino;
