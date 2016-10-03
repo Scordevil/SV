@@ -486,7 +486,7 @@ public class JugueteCT {
         yAxis.setMax(10);
 
         animatedModel2 = initBarModel();
-        animatedModel2.setTitle("Articulos Mas Rankeados");
+        animatedModel2.setTitle("Articulos Mas Seleccionados");
         animatedModel2.setAnimate(true);
         animatedModel2.setLegendPosition("ne");
         yAxis = animatedModel2.getAxis(AxisType.Y);
@@ -495,7 +495,7 @@ public class JugueteCT {
         yAxis.setMax(valor);
 
         animatedModel3 = initBarModel2();
-        animatedModel3.setTitle("Articulos Mas Seleccionados");
+        animatedModel3.setTitle("Articulos Mas Votados");
         animatedModel3.setAnimate(true);
         animatedModel3.setLegendPosition("ne");
         yAxis = animatedModel3.getAxis(AxisType.Y);
