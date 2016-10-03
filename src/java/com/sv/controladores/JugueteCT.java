@@ -19,6 +19,7 @@ import com.sv.dao.PedidoDao;
 import com.sv.modelos.Empresa;
 import com.sv.modelos.Inventario;
 import com.sv.modelos.Pedido;
+import com.sv.modelos.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -52,8 +53,10 @@ public class JugueteCT {
 
     private Inventario juguete;
     private Pedido pedido;
+    private Usuario usuario;
     private List<Inventario> inventarios;
     private List<Inventario> inventariosMasSeleccionados;
+    private List<Inventario> inventariosSeleccionados;
     private List<Inventario> inventariosMasVotados;
     private List<String> images;
     private int vista;
@@ -74,6 +77,7 @@ public class JugueteCT {
         juguete = new Inventario();
         inventarios = new ArrayList<>();
         inventariosMasSeleccionados = new ArrayList<>();
+        inventariosSeleccionados = new ArrayList<>();
         inventariosMasVotados = new ArrayList<>();
         images = new ArrayList<>();
         vista = 0;
@@ -82,6 +86,7 @@ public class JugueteCT {
         operacion = 0;
         empresa = new Empresa();
         calificacion = 0;
+        usuario = new Usuario();
 
     }
 
@@ -230,6 +235,22 @@ public class JugueteCT {
 
     public void setOperacion(int operacion) {
         this.operacion = operacion;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Inventario> getInventariosSeleccionados() {
+        return inventariosSeleccionados;
+    }
+
+    public void setInventariosSeleccionados(List<Inventario> inventariosSeleccionados) {
+        this.inventariosSeleccionados = inventariosSeleccionados;
     }
 
     //Metodos
@@ -606,6 +627,13 @@ public class JugueteCT {
         }
 
 //        }
+    }
+
+    public void consultarJuguetesEdadGeneroCiudadEmpresa() {
+        inventariosSeleccionados = new ArrayList<>();
+        PedidoDao pedidoDao = new PedidoDao();
+        inventariosSeleccionados = pedidoDao.ConsultarJuguetesEdadGeneroCiudadEmpresa(usuario.getIdEmpresa().getIdEmpresa(),
+                pedido.getEdadHijo(), juguete.getGenero(), usuario.getIdCiudad().getIdCiudad());
     }
 
 }

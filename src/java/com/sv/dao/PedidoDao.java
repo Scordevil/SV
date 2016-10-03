@@ -74,43 +74,37 @@ public class PedidoDao {
 
     public int EditarPedido(Pedido pedido) {
         ClienteEditarPedido cliente = new ClienteEditarPedido();
-        return cliente.editarPedido(int.class, "" + pedido.getIdInventario(), ""+ pedido.getIdPedido());
+        return cliente.editarPedido(int.class, "" + pedido.getIdInventario(), "" + pedido.getIdPedido());
     }
 
-//    public List<Inventario> ConsultarJuguetesEdadGeneroCiudadEmpresa(int idEmpresa, int edad, String genero, int idCiudad) {
-//        ConsultarJuguetesEdadGeneroCiudadEmpresa Inventario = new ConsultarJuguetesEdadGeneroCiudadEmpresa();
-//        List<HashMap> datos = Inventario.consultarJuguetesEdadGeneroCiudadEmpresa(List.class, idEmpresa + "", edad + "", genero, idCiudad +"");
-//        List<Inventario> Inventarios = new ArrayList<>();
-//
-//        for (int i = 0; i < datos.size(); i++) {
-//            LinkedHashMap usuario = (LinkedHashMap) datos.get(i).get("idUsuario");
-//
-////            pedidos.add(new Pedido((int) datos.get(i).get("idPedido"),
-////                    (String) datos.get(i).get("nombreHijo"),
-////                    (int) datos.get(i).get("edadHijo"),
-////                    (String) datos.get(i).get("sexoHijo"),
-////                    (String) datos.get(i).get("nombreEncargado"),
-////                    (String) datos.get(i).get("ciudadEncargado"),
-////                    (String) datos.get(i).get("emailEncargado"),
-////                    (String) datos.get(i).get("telefonoEncargado"),
-////                    (Date) datos.get(i).get("fechaEntrega"),
-////                    (Date) datos.get(i).get("horaEntrega"),
-////                    (String) datos.get(i).get("direccionEntrega"),
-////                    new Usuario((int) usuario.get("idUsuario"))));
-//
+    public List<Inventario> ConsultarJuguetesEdadGeneroCiudadEmpresa(int idEmpresa, int edad, String genero, int idCiudad) {
+        ConsultarJuguetesEdadGeneroCiudadEmpresa Inventario = new ConsultarJuguetesEdadGeneroCiudadEmpresa();
+        List<HashMap> datos = Inventario.consultarJuguetesEdadGeneroCiudadEmpresa(List.class, idEmpresa + "", edad + "", genero, idCiudad + "");
+        List<Inventario> Inventarios = new ArrayList<>();
+
+        for (int i = 0; i < datos.size(); i++) {
+            LinkedHashMap usuario = (LinkedHashMap) datos.get(i).get("idUsuario");
+
 //            Inventarios.add(new Inventario((int) datos.get(i).get("idInventario"),
 //                    (String) datos.get(i).get("nombre"),
 //                    (String) datos.get(i).get("genero"),
-//                    new Empresa(new Usuario(new Ciudad((int)datos.get(i).get("idCiudad"),
-//                            (String)datos.get(i).get("nombre")),
-//                            (String)datos.get(i).get("cc"),
+//                    new Empresa(new Usuario(new Ciudad((int) datos.get(i).get("idCiudad"),
 //                            (String) datos.get(i).get("nombre")),
-//                    new Pedido((String)datos.get(i).get("nombreHijo"),
-//                                (int)datos.get(i).get("edadHijo")))));
-//                          
-//        }
-//        return Inventarios;
-//    }
-}
+//                            (String) datos.get(i).get("cc"),
+//                            (String) datos.get(i).get("nombre")),
+//                            new Pedido((String) datos.get(i).get("nombreHijo"),
+//                                    (int) datos.get(i).get("edadHijo")))));
+            Inventarios.add(new Inventario((int) datos.get(i).get("idInventario"),
+                    (String) datos.get(i).get("nombre"),
+                    (String) datos.get(i).get("genero"),
+                    new Empresa(new Usuario(new Ciudad((int) datos.get(i).get("idCiudad"),
+                            (String) datos.get(i).get("nombre")), (String) datos.get(i).get("cc"),
+                            (String) datos.get(i).get("nombre"))),
+                    new Pedido((String) datos.get(i).get("nombreHijo"),
+                            (int) datos.get(i).get("edadHijo"))
+            ));
 
-    
+        }
+        return Inventarios;
+    }
+}

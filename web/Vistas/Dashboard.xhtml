@@ -122,7 +122,8 @@
                                         <div class="widget-content">
                                             <div class="widget big-stats-container">
                                                 <div class="widget-content">
-                                                    <h:form>
+                                                    <h:form id="consultarVotados">
+
                                                         <p:dataTable id="tbl" var="inv" value="#{jugueteCT.inventariosMasVotados}"
                                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                                                      paginator="true" rows="3" style="margin-bottom:20px">
@@ -209,8 +210,48 @@
                                         <div class="widget-content">
                                             <div class="widget big-stats-container">
                                                 <div class="widget-content">
-                                                    <h:form>
-                                                        <p:dataTable id="tbl" var="inv" value="#{jugueteCT.inventariosMasSeleccionados}"
+                                                    <h:form id="consultarSeleccionados">
+                                                        <div class="form-group">
+                                                            <label for="inputEmpresa" class="col-sm-4 control-label">Nombre Empresa: </label>
+                                                            <h:selectOneMenu id="inputEmpresa" class="form-control "  style="width: 66.6666666% !important;"  value="#{jugueteCT.usuario.idEmpresa.idEmpresa}" >
+                                                                <!--<p:ajax event="change" listener="{usuarioCT.consultarUsuarioPorEmpresasLikeInicio()}" update="user"/>-->
+                                                                <f:selectItem itemLabel="Seleccione empresa" itemValue="0"/>
+                                                                <!--                                                                        <c:if test="{usuarioCT.idTipoUsuario == 1}">
+                                                                    <f:selectItem itemLabel="Todos" itemValue="999999999"/>
+                                                                                                                                        </c:if>-->
+                                                                <f:selectItems value="#{empresaCT.empresas}" var="emp" itemLabel="#{emp.nombre}" itemValue="#{emp.idEmpresa}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:message for="inputEmpresa" ></p:message>
+                                                        </div>   
+                                                        <div class="form-group">
+                                                            <label for="inputOficina" class="col-sm-4 control-label"> Edad: </label>
+                                                            <p:inputText class="form-control"  style="width: 66.6666666% !important;" placeholder="Ejemplo: 12" value="#{jugueteCT.pedido.edadHijo}"/>                                                            
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label for="inputGenero" class=" col-sm-4  control-label">Genero: </label>
+                                                            <h:selectOneMenu id="inputGenero" class="form-control "  value="#{jugueteCT.juguete.genero}"  style="width: 66.6666666% !important;"  requiredMessage="El Campo Genero es Requerido" required ="true">
+                                                                <f:selectItem itemLabel="Seleccione genero" noSelectionOption="true"/>
+                                                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                                <f:selectItem itemLabel="Femenino" itemValue="F"/>  
+                                                                <f:selectItem itemLabel="Unisex" itemValue="A"/>
+                                                            </h:selectOneMenu>
+                                                            <p:message for="inputGenero" ></p:message>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputCiudad" class="col-sm-4 control-label">Ciudad: </label>
+                                                            <h:selectOneMenu class="form-control" value="#{jugueteCT.usuario.idCiudad.idCiudad}" style="width: 66.6666666% !important;" >
+                                                                <f:selectItem itemLabel="Seleccione Ciudad"/>
+                                                                <f:selectItems value="#{ciudadCT.ciudades}" var="ciu" itemLabel="#{ciu.nombre}" itemValue="#{ciu.idCiudad}"/>
+                                                            </h:selectOneMenu>
+                                                        </div>
+                                                        <div align="right">
+                                                            <h:panelGrid columns="2">
+                                                                <p:commandButton action="#{jugueteCT.consultarJuguetesEdadGeneroCiudadEmpresa()}"
+                                                                                 update=" :consultarSeleccionados" class=" btn btn-info" value="Buscar" style="margin-bottom: 20px;" />
+                                                            </h:panelGrid>
+                                                        </div>
+                                                        <p:dataTable id="tbl" var="inv" value="#{jugueteCT.inventariosSeleccionados}"
                                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                                                      paginator="true" rows="3" style="margin-bottom:20px">
 
@@ -226,25 +267,17 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Cedula" />
                                                                 </f:facet>
-                                                                <h:outputText value="" />
+                                                                <h:outputText value="#{inv.idEmpresa.idUsuario.cc}" />
                                                             </p:column>
 
                                                             <p:column>
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Nombre"/>
                                                                 </f:facet>
-                                                                <h:outputText value="" />
+                                                                <h:outputText value="#{inv.idEmpresa.idUsuario.nombre}" />
                                                             </p:column>
 
-                                                            <p:column>
-                                                                <f:facet name="header">
-                                                                    <h:outputText value="Ciudad" />
-                                                                </f:facet>
-                                                                <h:outputText value=""/>
-
-                                                            </p:column>
-
-                                                            <p:column>
+                                                              <p:column>
                                                                 <f:facet name="header">
                                                                     <h:outputText value="nombres hijos" />
                                                                 </f:facet>
@@ -254,19 +287,19 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Edad" />
                                                                 </f:facet>
-                                                                <h:outputText value="" />
+                                                                <h:outputText value="#{inv.pedido.edadHijo}" />
                                                             </p:column>
                                                             <p:column>
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Genero" />
                                                                 </f:facet>
-                                                                <h:outputText value="" />
+                                                                <h:outputText value="#{inv.genero}" />
                                                             </p:column>
                                                             <p:column>
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Articulo Seleccionado" />
                                                                 </f:facet>
-                                                                <h:outputText value="" />
+                                                                <h:outputText value="#{inv.nombre}" />
                                                             </p:column>
                                                         </p:dataTable>
 
