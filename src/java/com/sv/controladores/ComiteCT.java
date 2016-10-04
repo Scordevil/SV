@@ -11,6 +11,7 @@ import com.sv.dao.CorreoDao;
 import com.sv.dao.InventarioDao;
 import com.sv.dao.UsuarioDao;
 import com.sv.modelos.Comite;
+import com.sv.modelos.Empresa;
 import com.sv.modelos.Estado;
 import com.sv.modelos.Inventario;
 import com.sv.modelos.Usuario;
@@ -29,14 +30,17 @@ public class ComiteCT {
     private Comite comite;
     private List<Comite> comites;
     private List<Inventario> inventarios;
+    private List<Usuario> empleadosSS;
     private List<Usuario> empleados;
     private int valor;
+    private String buscar;
 
     public ComiteCT() {
         comite = new Comite();
         comites = new ArrayList<>();
         inventarios = new ArrayList<>();
         empleados = new ArrayList<>();
+        empleadosSS = new ArrayList<>();
         valor = 0;
 
     }
@@ -80,6 +84,22 @@ public class ComiteCT {
         this.empleados = empleados;
     }
 
+    public String getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(String buscar) {
+        this.buscar = buscar;
+    }
+
+    public List<Usuario> getEmpleadosSS() {
+        return empleadosSS;
+    }
+
+    public void setEmpleadosSS(List<Usuario> empleadosSS) {
+        this.empleadosSS = empleadosSS;
+    }
+
     public void registrar() {
         ComiteDao comiteDao = new ComiteDao();
         CorreoDao correoDao = new CorreoDao();
@@ -112,6 +132,7 @@ public class ComiteCT {
                 comite = new Comite();
                 inventarios.clear();
                 empleados.clear();
+                empleadosSS.clear();
 
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Seleccione empleados para el comite");
@@ -137,6 +158,26 @@ public class ComiteCT {
         } else {
             comites = comiteDao.consultarComitesPorUsuario(Sesion.obtenerSesion().getIdUsuario());
         }
+    }
+
+    public void buscarSegunEmpresa() {
+        empleadosSS = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        if (buscar.isEmpty()) {
+            empleadosSS = usuarioDao.ConsultarUsuariosSegunEmpresa(new Empresa(comite.getIdEmpresa().getIdEmpresa()));
+        } else if (buscar.length() >= 2) {
+            empleadosSS = usuarioDao.ConsultarUsuariosSegunEmpresaLikeInicioComite(new Empresa(comite.getIdEmpresa().getIdEmpresa()), buscar);
+        } else {
+            empleadosSS = new ArrayList<>();
+        }
+    }
+
+    public void buscarSegunEmpresa2() {
+        empleadosSS = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+
+        empleadosSS = usuarioDao.ConsultarUsuariosSegunEmpresa(new Empresa(comite.getIdEmpresa().getIdEmpresa()));
+
     }
 
 }

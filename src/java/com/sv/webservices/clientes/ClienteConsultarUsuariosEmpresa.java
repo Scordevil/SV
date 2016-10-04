@@ -30,7 +30,7 @@ public class ClienteConsultarUsuariosEmpresa {
 
     public ClienteConsultarUsuariosEmpresa() {
         client = ResteasyClientBuilder.newBuilder().build();
-        webTarget = client.target(BASE_URI).path("consultarUsuariosPorEmpresa");
+        webTarget = client.target(BASE_URI).path("consultarUsuariosPorEmpresaYComite");
     }
 
     public <T> T consultarUsuariosPorEmpresa(Class<T> responseType, String idEmpresa) throws ClientErrorException {
