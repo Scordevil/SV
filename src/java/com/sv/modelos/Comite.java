@@ -44,6 +44,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "Comite.findByFechaApertura", query = "SELECT c FROM Comite c WHERE c.fechaApertura = :fechaApertura"),
     @NamedQuery(name = "Comite.findByFechaCierre", query = "SELECT c FROM Comite c WHERE c.fechaCierre = :fechaCierre")})
 public class Comite implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +80,11 @@ public class Comite implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idComite")
     private Collection<Votacion> votacionCollection;
 
-    public Comite(){
+    private String fechaAperturaString;
+
+    private String fechaCierreString;
+
+    public Comite() {
         this.idEmpresa = new Empresa();
         this.idEstado = new Estado();
         this.idComite = 0;
@@ -98,9 +103,18 @@ public class Comite implements Serializable {
         this.idEmpresa = idEmpresa;
         this.idEstado = idEstado;
     }
-    
-    
-        public Comite(Integer idComite, String nombre, String descripcion, Date fechaApertura, Date fechaCierre, Empresa idEmpresa) {
+
+    public Comite(Integer idComite, String nombre, String descripcion, String fechaAperturaString, String fechaCierreString, Empresa idEmpresa, Estado idEstado) {
+        this.idComite = idComite;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaAperturaString = fechaAperturaString;
+        this.fechaAperturaString = fechaAperturaString;
+        this.idEmpresa = idEmpresa;
+        this.idEstado = idEstado;
+    }
+
+    public Comite(Integer idComite, String nombre, String descripcion, Date fechaApertura, Date fechaCierre, Empresa idEmpresa) {
         this.idComite = idComite;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -108,7 +122,15 @@ public class Comite implements Serializable {
         this.fechaCierre = fechaCierre;
         this.idEmpresa = idEmpresa;
     }
-    
+
+    public Comite(Integer idComite, String nombre, String descripcion, String fechaAperturaString, String fechaCierreString, Empresa idEmpresa) {
+        this.idComite = idComite;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaAperturaString = fechaAperturaString;
+        this.fechaCierreString = fechaCierreString;
+        this.idEmpresa = idEmpresa;
+    }
 
     public Integer getIdComite() {
         return idComite;
@@ -148,6 +170,22 @@ public class Comite implements Serializable {
 
     public void setFechaCierre(Date fechaCierre) {
         this.fechaCierre = fechaCierre;
+    }
+
+    public String getFechaAperturaString() {
+        return fechaAperturaString;
+    }
+
+    public void setFechaAperturaString(String fechaAperturaString) {
+        this.fechaAperturaString = fechaAperturaString;
+    }
+
+    public String getFechaCierreString() {
+        return fechaCierreString;
+    }
+
+    public void setFechaCierreString(String fechaCierreString) {
+        this.fechaCierreString = fechaCierreString;
     }
 
     @XmlTransient
@@ -220,5 +258,5 @@ public class Comite implements Serializable {
     public String toString() {
         return "com.sv.modelos.Comite[ idComite=" + idComite + " ]";
     }
-    
+
 }

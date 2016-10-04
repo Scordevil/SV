@@ -93,9 +93,10 @@ public class ComiteDao {
             comites.add(new Comite((int) datos.get(i).get("idComite"),
                     (String) datos.get(i).get("nombre"),
                     (String) datos.get(i).get("descripcion"),
-                    (Date) datos.get(i).get("fechaApertura"),
-                    (Date) datos.get(i).get("fechaCierre"),
-                    ed.consultarEmpresa(new Empresa((int) map1.get("idEmpresa")))));
+                    (String) datos.get(i).get("fechaAperturaString"),
+                    (String) datos.get(i).get("fechaAperturaString"),
+                    ed.consultarEmpresa(new Empresa((int) map1.get("idEmpresa")))
+                  ));
 
         }
 
@@ -114,8 +115,8 @@ public class ComiteDao {
             comites.add(new Comite((int) datos.get(i).get("idComite"),
                     (String) datos.get(i).get("nombre"),
                     (String) datos.get(i).get("descripcion"),
-                    (Date) datos.get(i).get("fechaApertura"),
-                    (Date) datos.get(i).get("fechaCierre"),
+                    (String) datos.get(i).get("fechaApertura"),
+                    (String) datos.get(i).get("fechaCierre"),
                     ed.consultarEmpresa(new Empresa((int) map1.get("idEmpresa"))),
                     new Estado((int) datos.get(i).get("idEstado"))));
 
