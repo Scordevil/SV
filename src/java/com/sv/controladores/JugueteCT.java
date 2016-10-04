@@ -550,7 +550,7 @@ public class JugueteCT {
         inventario.setLabel("Articulos");
 
         if (inventariosMasSeleccionados.size() >= 2) {
-            for (int i = 0; i <= 2; i++) {
+            for (int i = 0; i < 2; i++) {
                 inventario.set(inventariosMasSeleccionados.get(i).getCodigo(), 0);
             }
         } else if (inventariosMasSeleccionados.size() >= 1) {
@@ -572,13 +572,13 @@ public class JugueteCT {
         ChartSeries inventario = new ChartSeries();
         inventario.setLabel("Articulos");
 
-        if (inventariosMasVotados.size() >= 3) {
-            for (int i = 1; i <= 3; i++) {
-                inventario.set(inventariosMasVotados.get(i).getCodigo(), 1);
+        if (inventariosMasVotados.size() >= 2) {
+            for (int i = 1; i < 2; i++) {
+                inventario.set(inventariosMasVotados.get(i).getCodigo(), 0);
             }
         } else if (inventariosMasVotados.size() >= 1) {
             for (int i = 0; i < inventariosMasVotados.size(); i++) {
-                inventario.set(inventariosMasVotados.get(i).getCodigo(), 1);
+                inventario.set(inventariosMasVotados.get(i).getCodigo(), 0);
             }
         } else {
             inventario.set("", 0);
