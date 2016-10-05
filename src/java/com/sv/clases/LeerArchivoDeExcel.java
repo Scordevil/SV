@@ -88,6 +88,9 @@ public class LeerArchivoDeExcel {
             fechaE = sheet.getCell(16, fila).getContents();
             horaE = sheet.getCell(17, fila).getContents();
             direccionE = sheet.getCell(18, fila).getContents();
+            user = sheet.getCell(19, fila).getContents();
+            contrasena = sheet.getCell(2, fila).getContents();
+            
 
             usuario.setNombre(nombre.trim());
             usuario.setAreaTrabajo(area.trim());
