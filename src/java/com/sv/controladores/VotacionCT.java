@@ -7,6 +7,7 @@ package com.sv.controladores;
 
 import com.sv.clases.Sesion;
 import com.sv.dao.ComiteDao;
+import com.sv.dao.InventarioDao;
 import com.sv.dao.VotacionDao;
 import com.sv.modelos.Comite;
 import com.sv.modelos.Inventario;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RateEvent;
@@ -25,6 +27,7 @@ import org.primefaces.event.RateEvent;
  */
 public class VotacionCT {
 
+    private List<Inventario> inventarios;
     private Votacion votacion;
     private int calificacion;
     private List<Votacion> votaciones;
@@ -32,9 +35,33 @@ public class VotacionCT {
 
     public VotacionCT() {
         votacion = new Votacion();
+        inventarios = new ArrayList<>();
         calificacion = 0;
         votaciones = new ArrayList<>();
         juguete = new Inventario();
+    }
+    
+    @PostConstruct
+    public void init() {
+
+//        InventarioDao inventarioDao = new InventarioDao();
+//        int idComite = 0;
+//        int valor = 0;
+//        ComiteDao comiteDao = new ComiteDao();
+//        idComite = comiteDao.consultarComitePorUsuario(Sesion.obtenerSesion().getIdUsuario());
+//        if (idComite > 0) {
+//            valor = comiteDao.validarVotacionPorUsuario(Sesion.obtenerSesion().getIdUsuario()); //mayor a 0, ya voto
+//            if (valor > 0) {
+//                inventarios = inventarioDao.consultarJuguetes();
+//            } else {
+//                inventarios = inventarioDao.ConsultarJuguetesComite(idComite);
+//            }
+//        } else {
+//            inventarios = inventarioDao.consultarJuguetes();
+//        }
+      
+
+
     }
 
     public Votacion getVotacion() {
@@ -59,6 +86,14 @@ public class VotacionCT {
 
     public void setJuguete(Inventario juguete) {
         this.juguete = juguete;
+    }
+
+    public List<Inventario> getInventarios() {
+        return inventarios;
+    }
+
+    public void setInventarios(List<Inventario> inventarios) {
+        this.inventarios = inventarios;
     }
 
     public void onrate(RateEvent rateEvent) {
@@ -111,7 +146,7 @@ public class VotacionCT {
         VotacionDao votacionDao = new VotacionDao();
         int resultado = 0;
         Votacion vota = new Votacion();
-        vota.setCalificacion(calificacion+"");
+        vota.setCalificacion(calificacion + "");
         vota.getIdInventario().setIdInventario(idInventario);
         vota.getIdUsuario().setIdUsuario(idUsuario);
         ComiteDao comiteDao = new ComiteDao();
@@ -123,12 +158,19 @@ public class VotacionCT {
         if (resultado == 1) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito", "Votacion Registrada");
             FacesContext.getCurrentInstance().addMessage(null, message);
+   
         } else if (resultado == 0) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Ocurrio algun problema en el proceso de votacion");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
         votaciones = new ArrayList<>();
 //        calificacion = 0;
+    }
+
+    public void consultarJuguetePorRangoYEdad() {
+        InventarioDao inventarioDao = new InventarioDao();
+        inventarios = inventarioDao.ConsultarJuguetesRangoGenero(juguete.getEdadDesde(), juguete.getEdadHasta(), juguete.getGenero(), Sesion.obtenerSesion().getIdUsuario());
+
     }
 
 }

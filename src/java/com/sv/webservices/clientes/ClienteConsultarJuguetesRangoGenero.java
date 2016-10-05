@@ -39,11 +39,12 @@ public class ClienteConsultarJuguetesRangoGenero {
      * @param desde query parameter
      * @param hasta query parameter
      * @param genero query parameter
+     * @param idUsuario
      * @return response object (instance of responseType class)
      */
-    public <T> T consultarJuguetesRangoGenero(Class<T> responseType, String desde, String hasta, String genero) throws ClientErrorException {
-        String[] queryParamNames = new String[]{"desde", "hasta", "genero"};
-        String[] queryParamValues = new String[]{desde, hasta, genero};
+    public <T> T consultarJuguetesRangoGenero(Class<T> responseType, String desde, String hasta, String genero, String idUsuario) throws ClientErrorException {
+        String[] queryParamNames = new String[]{"desde", "hasta", "genero", "idUsuario"};
+        String[] queryParamValues = new String[]{desde, hasta, genero, idUsuario};
         ;
         javax.ws.rs.core.Form form = getQueryOrFormParams(queryParamNames, queryParamValues);
         javax.ws.rs.core.MultivaluedMap<String, String> map = form.asMap();

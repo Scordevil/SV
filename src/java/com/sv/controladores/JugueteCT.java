@@ -348,7 +348,7 @@ public class JugueteCT {
 
     public void consultarJuguetePorRangoYEdad() {
         InventarioDao inventarioDao = new InventarioDao();
-        inventarios = inventarioDao.ConsultarJuguetesRangoGenero(juguete.getEdadDesde(), juguete.getEdadHasta(), juguete.getGenero());
+        inventarios = inventarioDao.ConsultarJuguetesRangoGenero(juguete.getEdadDesde(), juguete.getEdadHasta(), juguete.getGenero(), Sesion.obtenerSesion().getIdUsuario());
 
     }
 

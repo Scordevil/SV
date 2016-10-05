@@ -196,9 +196,9 @@ public class InventarioDao {
         return juguetes;
     }
 
-    public List<Inventario> ConsultarJuguetesRangoGenero(int desde, int hasta, String genero) {
+    public List<Inventario> ConsultarJuguetesRangoGenero(int desde, int hasta, String genero, int idUsuario) {
         ClienteConsultarJuguetesRangoGenero cliente = new ClienteConsultarJuguetesRangoGenero();
-        List<HashMap> datos = cliente.consultarJuguetesRangoGenero(List.class, desde + "", hasta + "", genero);
+        List<HashMap> datos = cliente.consultarJuguetesRangoGenero(List.class, desde + "", hasta + "", genero, idUsuario+"");
         List<Inventario> juguetes = new ArrayList<>();
 
         for (int i = 0; i < datos.size(); i++) {

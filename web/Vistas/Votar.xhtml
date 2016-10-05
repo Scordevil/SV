@@ -29,15 +29,21 @@
                                                                 <p:graphicImage name="images/#{image}"  alt="descripcion breve de #{image}" title="#{image}" class="img-responsive" />
                                                             </p:galleria>
 
-                                                             <p:inputTextarea value="#{jugueteCT.juguete.descripcion}" style="width: 85%; margin-top: 10px;" rows="7" />
+                                                            <p:inputTextarea value="#{jugueteCT.juguete.descripcion}" style="width: 85%; margin-top: 10px;" rows="7" />
                                                             <!--panelWidth="800" panelHeight="400"-->
                                                         </div>
+                                                        <center>
+                                                            <p ><strong>Calificacion:</strong></p>
+                                                            <p:rating onRate="#{votacionCT.getJuguete().setIdInventario(item.idInventario)}" stars="5" value="#{votacionCT.votacion.calificacion}" style="width: 100px;margin-bottom: 30px;">
+                                                                <p:ajax event="rate" listener="#{votacionCT.onrate}"/>                                                                              
+                                                            </p:rating><br/>
+                                                        </center>
                                                         <p>
                                                             <b:commandButton value="Volver Atras" action="Votacion de Juguetes" class="btn btn-danger " update=":formulario" style="margin-right: 10px;">
                                                                 <b:iconAwesome name="fa fa-arrow-left"></b:iconAwesome>
                                                             </b:commandButton>
 
-                                                            <b:commandButton value="Votar!" action="#{jugueteCT.consultarJuguetePorGeneroYEdad()}" update=":formulario" class="btn btn-info " >
+                                                            <b:commandButton value="Votar!" action="#{votacionCT.registrarVotaciones(sesionCT.obtenerSesion().idUsuario,jugueteCT.juguete.idInventario )}" update=":formulario" class="btn btn-info " >
                                                                 <b:iconAwesome name="send"></b:iconAwesome>
                                                             </b:commandButton>
                                                         </p>
