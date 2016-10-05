@@ -33,6 +33,7 @@ public class PedidoCT {
     public void init() {
         PedidoDao pedidoDao = new PedidoDao();
         //   pedido.getIdUsuario().setIdUsuario(3);
+        
         pedidos = pedidoDao.ConsultarPedidoPorId(Sesion.obtenerSesion().getIdUsuario());
 
         if (pedidos.isEmpty()) {
