@@ -99,28 +99,26 @@
                                                                         <img  src=".././resources/images/#{item.url1}.jpg" alt="Articulos" />
 
                                                                         <f:facet name="caption">
-                                                                            <h3>#{item.nombre}</h3>
+                                                                            <h3>(#{item.idInventario}) #{item.nombre}</h3>
                                                                             <p align="left"><strong>Calificacion:</strong></p>
-                                                                            <p:rating onRate="#{votacionCT.setJuguete(item)}" stars="5" value="#{votacionCT.votacion.calificacion}">
+                                                                            <p:rating onRate="#{votacionCT.getJuguete().setIdInventario(item.idInventario)}" stars="5" value="#{votacionCT.votacion.calificacion}">
                                                                                 <p:ajax event="rate" listener="#{votacionCT.onrate}"/>                                                                              
                                                                             </p:rating><br/>
                                                                             <hr/>
                                                                             <h:panelGrid columns="2">
                                                                                 <b:commandButton value="Ver Ficha" action="#{jugueteCT.consultarJuguetePorId(item.idInventario , 2)}" update=":formularioLista" class="btn btn-info " style="margin-right: 10px;">
                                                                                     <b:iconAwesome name="send"></b:iconAwesome>
-                                                                                </b:commandButton>                                                                                
-                                                                            </h:panelGrid>                                                                        
+                                                                                </b:commandButton>              
+                                                                                <b:commandButton value="Votar!" action="#{votacionCT.registrarVotaciones(sesionCT.obtenerSesion().idUsuario,item.idInventario )}" update=":formularioJuguetes" class="btn btn-info " >
+                                                                                    <b:iconAwesome name="star"></b:iconAwesome>
+                                                                                </b:commandButton>
+                                                                            </h:panelGrid>    
+
                                                                         </f:facet>
+
                                                                     </b:thumbnail>
                                                                 </b:column>
                                                             </c:forEach>
-                                                            <b:column>
-                                                            <center>
-                                                                <b:commandButton style="width: 60%" value="Votar!" action="#{votacionCT.registrarVotaciones()}" update=":formularioJuguetes" class="btn btn-info " >
-                                                                    <b:iconAwesome name="star"></b:iconAwesome>
-                                                                </b:commandButton>
-                                                            </center>
-                                                            </b:column>
                                                         </div>
                                                     </div>
                                                 </div>
